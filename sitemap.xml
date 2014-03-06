@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc></loc>
+    <lastmod>2014-03-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+    <url>
+    <loc>/blog/2011/12/09/certified-certified-scrum-master</loc>
+    <lastmod>2011-12-09T00:00:00-08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
+    <loc>/blog/2011/08/31/picasa-albums-v1-0-6</loc>
+    <lastmod>2011-08-31T00:00:00-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  </urlset>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[Mikhail Kozlov]]></title>
+    <link href="/atom.xml" rel="self"/>
+    <link href="/"/>
+    <updated>2014-03-06T01:00:16-08:00</updated>
+    <id>/</id>
+        <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[I’m Certified Certified Scrum Master!]]></title>
+            <link href="/blog/2011/12/09/certified-certified-scrum-master"/>
+            <updated>2011-12-09T00:00:00-08:00</updated>
+            <id>/blog/2011/12/09/certified-certified-scrum-master</id>
+            <content type="html"><![CDATA[<p>Took a short course back in September and now I'm Certified Certified Scrum Master.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Picasa Albums v1.0.6 is live]]></title>
+            <link href="/blog/2011/08/31/picasa-albums-v1-0-6"/>
+            <updated>2011-08-31T00:00:00-07:00</updated>
+            <id>/blog/2011/08/31/picasa-albums-v1-0-6</id>
+            <content type="html"><![CDATA[<p>Took a short course back in September and now I'm Certified Certified Scrum Master.</p>
+]]></content>
+        </entry>
+    </feed>
