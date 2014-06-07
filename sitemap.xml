@@ -7,6 +7,12 @@
     <priority>0.8</priority>
   </url>
     <url>
+    <loc>/blog/2014/07/07/moving-to-github</loc>
+    <lastmod>2014-07-07T00:00:00-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
     <loc>/blog/2011/12/09/certified-certified-scrum-master</loc>
     <lastmod>2011-12-09T00:00:00-08:00</lastmod>
     <changefreq>weekly</changefreq>

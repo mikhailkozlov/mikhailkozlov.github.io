@@ -3,9 +3,19 @@
     <title><![CDATA[Mikhail Kozlov]]></title>
     <link href="/atom.xml" rel="self"/>
     <link href="/"/>
-    <updated>2014-06-07T00:15:52-07:00</updated>
+    <updated>2014-06-07T12:48:09-07:00</updated>
     <id>/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Moving to Github]]></title>
+            <link href="/blog/2014/07/07/moving-to-github"/>
+            <updated>2014-07-07T00:00:00-07:00</updated>
+            <id>/blog/2014/07/07/moving-to-github</id>
+            <content type="html"><![CDATA[<p>Hosting, managing, updaing... Who has time for this? Good thing great folks from github made sites avaialbele to everyone.</p>
+
+<p>I'm sure some people find maintenance process facination, but I guess I'm not one of them. After 5 or 6 years of upgrades and transition with Wordpress it is time to move on. Move to good old static html.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[I’m Certified Certified Scrum Master!]]></title>
             <link href="/blog/2011/12/09/certified-certified-scrum-master"/>
