@@ -1,8 +1,8 @@
 ---
-layout: default
+layout: base
 title: About
 
 ---
-# About the Author or Blog
+# About Mikhail
 
-Here is a little information about the author or the blog.
+Ever since school I've been designing, building and implementing all sorts of SMB automation tools and systems. More recnetrly i got into CRM, ERP, and marketing automation.

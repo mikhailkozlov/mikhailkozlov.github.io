@@ -1,0 +1,16 @@
+{
+  "name": "Grunt Asset Management Package",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "2.1.0",
+    "bootstrap": "~3.1.1",
+    "font-awesome": "~4.0.3",
+    "backbone": "~1.1.0",
+    "underscore": "~1.5.2",
+    "handlebars": "v1.3.0",
+    "respond": "~1.4.2",
+    "html5shiv": "~3.7.0",
+    "nprogress": "0.1.2",
+      "highlightjs": "8.0.0"
+  }
+}

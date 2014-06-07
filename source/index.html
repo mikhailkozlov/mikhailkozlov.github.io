@@ -1,33 +1,47 @@
 ---
 layout: default
 title: Home
+sidebar: none
 generator: pagination
 pagination:
     max_per_page: 3
 use:
     - posts
 ---
-{% for post in page.pagination.items %}
-    <article>
-        <header>
-            <h2><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h2>
-        </header>
-        <div>
-            {{ post.blocks.content|raw }}
+
+<div id="white">
+    <div class="container">
+        <div class="row mt">
+            <div class="col-lg-6 col-lg-offset-3 centered">
+                <h3>Blog</h3>
+                <hr/>
+            </div>
         </div>
-        {% if post.meta.tags %}
-            <p class="tags">
-            Tags:
-            {% for tag in post.meta.tags %}
-            <a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+            {% for post in page.pagination.items %}
+                    <div class="row">
+                        <article class="col-lg-8 col-lg-offset-2">
+                            <header>
+                                <h2><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h2>
+                            </header>
+                            <div>
+                                {{ post.meta.excerpt|raw }}
+                            </div>
+                            {% if post.meta.tags %}
+                                <p class="tags">
+                                Tags:
+                                {% for tag in post.meta.tags %}
+                                <a href="{{ site.url }}/blog/tags/{{ tag|url_encode(true) }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                                </p>
+                            {% endif %}
+                        </article>
+                    </div>
             {% endfor %}
-            </p>
-        {% endif %}
-    </article>
-{% endfor %}
-{% if page.pagination.previous_page or page.pagination.next_page %}
-    <nav>
-        {% if page.pagination.previous_page %}<a href="{{ site.url }}{{ page.pagination.previous_page.url }}">Newer Posts</a>{% endif %}<br />
-        {% if page.pagination.next_page %}<a href="{{ site.url }}{{ page.pagination.next_page.url }}">Older Posts</a>{% endif %}<br />
-    </nav>
-{% endif %}
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                        <a class="btn btn-default btn-lg" href="{{ site.url }}/blog" title="Next Page"><span class="title">Read Blog</span></a></li>
+                </div>
+            </div>
+    </div>
+</div>
