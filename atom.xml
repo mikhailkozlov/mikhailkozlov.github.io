@@ -3,7 +3,7 @@
     <title><![CDATA[Mikhail Kozlov]]></title>
     <link href="/atom.xml" rel="self"/>
     <link href="/"/>
-    <updated>2014-03-06T01:00:16-08:00</updated>
+    <updated>2014-06-07T00:15:52-07:00</updated>
     <id>/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -19,7 +19,163 @@
             <link href="/blog/2011/08/31/picasa-albums-v1-0-6"/>
             <updated>2011-08-31T00:00:00-07:00</updated>
             <id>/blog/2011/08/31/picasa-albums-v1-0-6</id>
-            <content type="html"><![CDATA[<p>Took a short course back in September and now I'm Certified Certified Scrum Master.</p>
+            <content type="html"><![CDATA[<p>Please use github.com or simply update your plugin.</p>
+
+<h3>v. 1.0.6 Change Log:</h3>
+
+<ul>
+<li>GPLv2 (or later) license</li>
+<li>Updated Fancybox to the latest code. Added jQuery to the list of libs required during init</li>
+<li>Updated image thumbnails to work as expected</li>
+<li>Custom url for picasa albums</li>
+<li>New hooks to overwrite defualt layout without changing plugin</li>
+<li>You can find out more detail description of all changes in previous posts on Picasa Albums v1.0.6.</li>
+</ul>
+
+<h3>Code</h3>
+
+<p>Please get latest code from github.com and let me know what you think in Github's issue tracker.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Picasa Albums v1.0.6 is live on github.com]]></title>
+            <link href="/blog/2011/07/23/picasa-albums-v1-0-6-is-on-github"/>
+            <updated>2011-07-23T00:00:00-07:00</updated>
+            <id>/blog/2011/07/23/picasa-albums-v1-0-6-is-on-github</id>
+            <content type="html"><![CDATA[<p>Picasa Albums v1.0.6 is on github.com and awaits for some brave souls to take a it for a test drive. New version <a href="https://github.com/315design/Picasa-Albums-For-WordPress/issues/11">contains fixes for Fancybox's issue</a> submitted on github.com and thumbnail issue I found. v1.0.6 introduces 2 new features <a href="https://github.com/315design/Picasa-Albums-For-WordPress/wiki/Hooks">hooks</a> and custom url.</p>
+
+<p><a href="https://github.com/315design/Picasa-Albums-For-WordPress/tree/v1.0.6">Download v1.0.6 from github.com</a> and/or get details after the break.</p>
+
+<h2>Issues</h2>
+
+<h3>Fancybox</h3>
+
+<p><a href="https://github.com/mikhailkozlov/Picasa-Albums-For-WordPress/issues/11">Issue #11</a> describes the issue pretty well. In short Fancybox does not care about rel attributes that have multiple values set. I have looked around discussion boards and figured that the bast way would be to use data atribute to fix the problem. Unfortunately that means that plugin will run on modify version of Fancybox, but it looks like solution will make it back into the plugin and we could switch to standart version in near future. For now, you have to worry not, modifications are minor and 100% backwards compatible.</p>
+
+<h3>Thumbnails</h3>
+
+<p>Thumbnails look odd once you install plugin, so I took a look at them. It turns out plugin was trying to set size of Google's album cover to thumbnails despite settings of the plugin. This is fix now.</p>
+
+<h2>New Features</h2>
+
+<h2>"Hooks"</h2>
+
+<p>v1.0.6 adds notion of hooks. In case of Picasa Albums hooks are the functions that allow users overwrite default behavior of the plugin without hacking it. It is great for updatability and adds upgrade safe layer of customization. Right now we have only two hooks:</p>
+
+<ul>
+<li>wp_picasa_single_view_filter</li>
+<li>wp_picasa_list_view_filter
+Both of them take two parameters $post and $options. $post is WordPress post object of Picasa Album and $options is current plugin settings.</li>
+</ul>
+
+<h3>wp_picasa_single_view_filter</h3>
+
+<p>wp_picasa_single_view_filter hook allows you to safely overwrite default structure of the album page. You can customize the way thumbnails are styled on the page that displays single album (www.site.com/albums/albumName/). It is best to place hook function into functions.php:</p>
+
+<pre><code>function wp_picasa_single_view_filter($post,$options)
+{
+    $res = 'html';
+    // your code goes here
+    // function must return string
+    return $res;
+}
+</code></pre>
+
+<h3>wp_picasa_list_view_filter</h3>
+
+<p>wp_picasa_list_view_filter hook allows you to control how albums are displayed on Album's page (www.site.com/albums/). It is best to place hook function into functions.php:</p>
+
+<pre><code>function wp_picasa_list_view_filter(&amp;$post,&amp;$options){
+    $style = ($options['album_thumbcrop'] == 'yes') ? ' width:'.$post-&gt;post_excerpt['thumbnail']['height'].'; height:'.$post-&gt;post_excerpt['thumbnail']['height'].' ':' ';
+    $res = '
+
+
+    post_excerpt['thumbnail']['url'],$options).''); '.$style.'"&gt;
+    post_excerpt['title'].'" src="'.get_bloginfo( 'stylesheet_directory' ).'/images/thumb_frame_160.png" alt=""';
+    $res .= ($options['album_thumbcrop'] == 'yes') ? ' width="'.$post-&gt;post_excerpt['thumbnail']['height'].' height="'.$post-&gt;post_excerpt['thumbnail']['height'].'" ':' ';
+    $res .= ' /&gt;';
+    return $res;
+}
+</code></pre>
+
+<p>The code above is live example form www.pashaspr.com's gallery. Right click on the site to see css.</p>
+
+<h2>Custom Path</h2>
+
+<p>Picasa Albums v1.0.6 now lets you set custom path to the albums on settings page. Again, you do not have to hack plugin anymore to create custom url that suits your website. Please keep in mind that Permalinks have to be enabled on the blog to use this functionality. You can find this in settings section for the plugin.</p>
+
+<h2>Testing</h2>
+
+<p>I need your help. Please get latest code from <a href="https://github.com/315design/Picasa-Albums-For-WordPress/tree/v1.0.6">github.com</a> and let me know what you think in <a href="https://github.com/315design/Picasa-Albums-For-WordPress/issues?sort=created&amp;direction=desc&amp;state=closed">Github's issue tracker</a>.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Where IN Query Using Codeigniter MongoDB Library]]></title>
+            <link href="/blog/2011/07/20/Where-IN-Query-Using-Codeigniter-MongoDB-Library"/>
+            <updated>2011-07-20T00:00:00-07:00</updated>
+            <id>/blog/2011/07/20/Where-IN-Query-Using-Codeigniter-MongoDB-Library</id>
+            <content type="html"><![CDATA[<p>Thanks to Alex Bilbie we all have simple way of integrating new MongoDB data store into Codeigniter applications. Thank you Alex and all others who contributed. Library lets you easily create complex where clause without touching MongoDB syntax. Unfortunately IN (and I imagine NIN and some other statements) are not translated correctly. Specificaly proble surfaces when you try to query documents by _id. It looks like there is an open issue on <a href="https://bitbucket.org/alexbilbie/codeigniter-mongo-library/issue/18/one-where-when-using-_id">bitbucket.org</a>, but page never loads for me. If it works for you and it has fix, you can stop reading.</p>
+
+<h3>July 24, 2011: Update</h3>
+
+<p>My commit was pulled into main repo. Please be sure to <a href="https://github.com/alexbilbie/codeigniter-mongodb-library">check it out from Alex's repo</a>.</p>
+
+<h2>Solution</h2>
+
+<p>I do not have bitbucket account, so I forked library on <a href="https://github.com/alexbilbie/codeigniter-mongodb-library">gitgub.com</a> and created a <a href="https://github.com/315design/codeigniter-mongodb-library/commit/053fe83fc870b287850f9ba49af89dc3cc595411">fix</a>:</p>
+
+<pre><code>if( is_array( $this-&gt;wheres['_id'][key($this-&gt;wheres['_id'])]) ){
+    foreach($this-&gt;wheres['_id'][key($this-&gt;wheres['_id'])] as $i=&gt;$id)
+    {
+        if( !($id instanceof MongoId) )
+        {
+            $this-&gt;wheres['_id'][key($this-&gt;wheres['_id'])][$i] = new MongoId($id);
+        }else{
+            $this-&gt;wheres['_id'] = new MongoId($this-&gt;wheres['_id']);
+        }
+    }
+}
+</code></pre>
+
+<p>Code may be not the most robust, but it does the job for me. You can simply replace line 601 <code>($this-&gt;wheres['_id'] = new MongoId($this-&gt;wheres['_id']);)</code> with the code above or clone my repo on <a href="https://github.com/">github.com</a>. Let me know what you think down bellow or open an <a href="https://github.com/315design/codeigniter-mongodb-library/issues">issue</a>.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Picasa Albums is now on WordPress.org]]></title>
+            <link href="/blog/2011/01/17/picasa-albums-is-now-on-wordpress-org"/>
+            <updated>2011-01-17T00:00:00-08:00</updated>
+            <id>/blog/2011/01/17/picasa-albums-is-now-on-wordpress-org</id>
+            <content type="html"><![CDATA[<p>Picasa Albums For WordPress 3 is now on WordPress.org. Head over to <a href="http://wordpress.org/extend/plugins/picasa-albums/">Picasa Album page</a> to get the latest code or search for "Picasa Album" in your plugin section.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Tynt Insight For WordPress]]></title>
+            <link href="/blog/2010/12/14/tynt-insight-for-wordpress"/>
+            <updated>2010-12-14T00:00:00-08:00</updated>
+            <id>/blog/2010/12/14/tynt-insight-for-wordpress</id>
+            <content type="html"><![CDATA[<p>Guys and girls at <a href="http://tynt.com/product_copypaste#axzz33vKfflgI">Tynt.com</a> worked hard to make really cool free analytics tool. Basic idea is to keep track of what people copy/paste on your page and automatically link back copied content to original page. As many analytic tools it uses JavaScript that has to update on the blog every time tracking is changed. Tynt.com For WordPress tries to solve this problem by bringing configuration option to WordPress admin panel.</p>
+
+<p><strong>Update:</strong> It turns out there is a plugin with the same name, so I had to rename mine to Tynt.com For WordPress.</p>
+
+<p><strong>Update:</strong> <a href="http://wordpress.org/extend/plugins/tyntcom-for-wordpress/">Tynt.com For WordPress</a> now available though wordpress.org's Plugin Directory. Just head over to Tynt.com For WordPress page and click download. You can also instal it directly from your blog. Search for tynt.com in plugins section.</p>
+
+<h2>How to get plugin</h2>
+
+<p>Head over to <a href="https://github.com/315design/Tynt-Insight-For-WordPress">github</a> to get the latest code. This is regular WordPress plugin, so use is a snap. You can also search Plugin Directory for tynt.com and have your WordPress install it automatically</p>
+
+<h2>How to use it</h2>
+
+<ol>
+<li>Register @ http://www.tynt.com/ and get your Tynt ID (it is free). </li>
+<li>Get files from this repo and put them into "tynt-insight-for-wordpress" folder (actually any folder will work). </li>
+<li>Go to Plugins section of your WordPress and activate plugin "Tynt Insight For WordPress" plugin. </li>
+<li>Head over to "Tynt Insight" page in "Settings" section of the admin menu. </li>
+<li>Enter you Tynt ID and click save. 6. Done.</li>
+</ol>
+
+<h2>Feedback</h2>
+
+<p>Please feel free to post any feedback here or on <a href="https://github.com/315design/Tynt-Insight-For-WordPress/issues">github issue</a>.</p>
 ]]></content>
         </entry>
     </feed>

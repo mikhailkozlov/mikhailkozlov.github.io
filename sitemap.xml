@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc></loc>
-    <lastmod>2014-03-06</lastmod>
+    <lastmod>2014-06-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -15,6 +15,30 @@
     <url>
     <loc>/blog/2011/08/31/picasa-albums-v1-0-6</loc>
     <lastmod>2011-08-31T00:00:00-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
+    <loc>/blog/2011/07/23/picasa-albums-v1-0-6-is-on-github</loc>
+    <lastmod>2011-07-23T00:00:00-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
+    <loc>/blog/2011/07/20/Where-IN-Query-Using-Codeigniter-MongoDB-Library</loc>
+    <lastmod>2011-07-20T00:00:00-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
+    <loc>/blog/2011/01/17/picasa-albums-is-now-on-wordpress-org</loc>
+    <lastmod>2011-01-17T00:00:00-08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
+    <loc>/blog/2010/12/14/tynt-insight-for-wordpress</loc>
+    <lastmod>2010-12-14T00:00:00-08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
