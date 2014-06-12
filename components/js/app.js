@@ -22,7 +22,7 @@ portfolioControllers.controller('PortfolioViewController', ['$scope', '$routePar
         });
     }]
 ).config(function($sceProvider) {
-        $sceProvider.enabled();
+        $sceProvider.enabled(false);
     });
 
 myApp.config(['$routeProvider',

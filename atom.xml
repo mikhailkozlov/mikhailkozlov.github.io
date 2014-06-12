@@ -3,7 +3,7 @@
     <title><![CDATA[Mikhail Kozlov]]></title>
     <link href="/atom.xml" rel="self"/>
     <link href="/"/>
-    <updated>2014-06-11T22:54:28-07:00</updated>
+    <updated>2014-06-11T23:01:37-07:00</updated>
     <id>/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -98,7 +98,7 @@ function ($scope, $routeParams, $http) {
     });
 }]
 ).config(function($sceProvider) {
-    $sceProvider.enabled();
+    $sceProvider.enabled(false);
 });
 </code></pre>
 
