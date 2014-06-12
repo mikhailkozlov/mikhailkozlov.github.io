@@ -1,0 +1,12 @@
+<h1>Portfolio</h1>
+<p>You can find my latest open source code on <a href="https://github.com/mikhailkozlov">Github</a>. Here some examples of my past and current work.</p>
+<div class="portfolio-index">
+    <ul class="list-unstyled">
+        <li ng-repeat="work in works" class="col-sm-3">
+            <a href="#/[[ work.slug ]]" class="thumbnail"><img
+                    ng-src="/components/img/portfolio/thumb_[[ work.picture ]]"
+                    alt="[[ work.title ]]"/>
+            </a>
+        </li>
+    </ul>
+</div>
