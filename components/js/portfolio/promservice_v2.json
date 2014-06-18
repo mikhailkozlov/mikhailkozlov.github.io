@@ -1,0 +1,21 @@
+{
+    "id": 18,
+    "clients_id": 14,
+    "type": "website",
+    "release_dt": "2013-07-01",
+    "title": "JSC Promservice website v2",
+    "slug": "promservice_v2",
+    "uri": "www.promservice.ru",
+    "task": null,
+    "text_top": "After some experiments with Joomla and other CMSs company went back to basics with simple and clean design. New site is based on <a href='http://getbootstrap.com/'>Bootstrap</a> with custom theme and color pallet to make it look personal.",
+    "text_bottom": "The website features information on the company, the major lines of its business and on-line products catalog. Content is managed via github",
+    "feature": "",
+    "tech": "",
+    "thanks": "",
+    "anons": "promservice_v2_announce.png",
+    "picture": "promservice_v2_med.png",
+    "portfolio_ico": "",
+    "is_archive": 0,
+    "is_published": 1,
+    "meta": []
+}
