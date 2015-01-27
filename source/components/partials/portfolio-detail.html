@@ -1,0 +1,16 @@
+<h1>[[ work.title ]]</h1>
+
+
+<p ng-bind-html="work.text_top"></p>
+<div class="text-center">
+
+    <div ng-if="work.is_archive" >
+        <img ng-src="/components/img/portfolio/[[ work.picture ]]"
+            alt="[[ work.title ]]"/>
+    </div>
+    <a ng-if="!work.is_archive" href="http://[[ work.uri ]]" >
+        <img ng-src="/components/img/portfolio/[[ work.picture ]]"
+            alt="[[ work.title ]]"/>
+    </a>
+</div>
+<p ng-bind-html="work.text_bottom"></p>
