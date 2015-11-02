@@ -67,19 +67,19 @@
 
 <p><a href="https://github.com/315design/Picasa-Albums-For-WordPress/tree/v1.0.6">Download v1.0.6 from github.com</a> and/or get details after the break.</p>
 
-<h2>Issues</h2>
+<h2 id="issues">Issues</h2>
 
-<h3>Fancybox</h3>
+<h3 id="fancybox">Fancybox</h3>
 
 <p><a href="https://github.com/mikhailkozlov/Picasa-Albums-For-WordPress/issues/11">Issue #11</a> describes the issue pretty well. In short Fancybox does not care about rel attributes that have multiple values set. I have looked around discussion boards and figured that the bast way would be to use data atribute to fix the problem. Unfortunately that means that plugin will run on modify version of Fancybox, but it looks like solution will make it back into the plugin and we could switch to standart version in near future. For now, you have to worry not, modifications are minor and 100% backwards compatible.</p>
 
-<h3>Thumbnails</h3>
+<h3 id="thumbnails">Thumbnails</h3>
 
 <p>Thumbnails look odd once you install plugin, so I took a look at them. It turns out plugin was trying to set size of Google's album cover to thumbnails despite settings of the plugin. This is fix now.</p>
 
-<h2>New Features</h2>
+<h2 id="new-features">New Features</h2>
 
-<h2>"Hooks"</h2>
+<h2 id="%22hooks%22">"Hooks"</h2>
 
 <p>v1.0.6 adds notion of hooks. In case of Picasa Albums hooks are the functions that allow users overwrite default behavior of the plugin without hacking it. It is great for updatability and adds upgrade safe layer of customization. Right now we have only two hooks:</p>
 
@@ -89,7 +89,7 @@
 Both of them take two parameters $post and $options. $post is WordPress post object of Picasa Album and $options is current plugin settings.</li>
 </ul>
 
-<h3>wp_picasa_single_view_filter</h3>
+<h3 id="wp_picasa_single_view_filter">wp_picasa_single_view_filter</h3>
 
 <p>wp_picasa_single_view_filter hook allows you to safely overwrite default structure of the album page. You can customize the way thumbnails are styled on the page that displays single album (www.site.com/albums/albumName/). It is best to place hook function into functions.php:</p>
 
@@ -102,7 +102,7 @@ Both of them take two parameters $post and $options. $post is WordPress post obj
 }
 </code></pre>
 
-<h3>wp_picasa_list_view_filter</h3>
+<h3 id="wp_picasa_list_view_filter">wp_picasa_list_view_filter</h3>
 
 <p>wp_picasa_list_view_filter hook allows you to control how albums are displayed on Album's page (www.site.com/albums/). It is best to place hook function into functions.php:</p>
 
@@ -121,11 +121,11 @@ Both of them take two parameters $post and $options. $post is WordPress post obj
 
 <p>The code above is live example form www.pashaspr.com's gallery. Right click on the site to see css.</p>
 
-<h2>Custom Path</h2>
+<h2 id="custom-path">Custom Path</h2>
 
 <p>Picasa Albums v1.0.6 now lets you set custom path to the albums on settings page. Again, you do not have to hack plugin anymore to create custom url that suits your website. Please keep in mind that Permalinks have to be enabled on the blog to use this functionality. You can find this in settings section for the plugin.</p>
 
-<h2>Testing</h2>
+<h2 id="testing">Testing</h2>
 
 <p>I need your help. Please get latest code from <a href="https://github.com/315design/Picasa-Albums-For-WordPress/tree/v1.0.6">github.com</a> and let me know what you think in <a href="https://github.com/315design/Picasa-Albums-For-WordPress/issues?sort=created&amp;direction=desc&amp;state=closed">Github's issue tracker</a>.</p>
 </div>
@@ -188,7 +188,7 @@ Both of them take two parameters $post and $options. $post is WordPress post obj
             <div class="col-lg-4">
                 <h4>My Bunker</h4>
                 <p>
-                    Bay Area, CA.
+                    Atlanta, GA.
                 </p>
             </div><!-- /col-lg-4 -->
 
@@ -205,7 +205,7 @@ Both of them take two parameters $post and $options. $post is WordPress post obj
             <div class="col-lg-4">
                 <h4>Mikhail Kozlov</h4>
                 <p> <small>Developing for the web</small></p>
-                <p>&copy; 2014 Mikhail Kozlov<br>
+                <p>&copy; 2015 Mikhail Kozlov<br>
                     Theme by <a href="http://www.blacktie.co/" target="_blank" title="Free handsome Bootstrap themes for everyone. Because \"free\" doesn't always mean crappy.">BlackTie.co</a></p>
                 <span class="credit">Powered by <a href="http://sculpin.io">Sculpin</a></span>
             </div><!-- /col-lg-4 -->

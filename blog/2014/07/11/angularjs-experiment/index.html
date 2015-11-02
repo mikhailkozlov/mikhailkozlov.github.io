@@ -67,7 +67,7 @@
 
 <p>Having used Backbone at work, I've decided to mix it up a bit and dive into <a href="https://angularjs.org/">AngularJS</a>. Using Angular is dead simple. It took me a few hours to re-build SQL driven <a href="/portfolio/#/">Portfolio</a> with some json files. If you're interested in details or would like to take a look under the hood, you can find code on <a href="https://github.com/mikhailkozlov/mikhailkozlov.github.io/blob/master/components/js/app.js">github</a> as usual.</p>
 
-<h3>Setup</h3>
+<h3 id="setup">Setup</h3>
 
 <p>Many simple apps start with in place templates, hardcoded models and so on, but we've been there and done that. Let's jump into routing, ajax and partials.</p>
 
@@ -78,7 +78,7 @@
 
 <p>AngularJS's router will inject view right there.</p>
 
-<h3>Routing</h3>
+<h3 id="routing">Routing</h3>
 
 <p>Routing is very simple and very much based on what is offered in tutorial</p>
 
@@ -101,7 +101,7 @@
 
 <p>Above we're going to treat list view as root and render portfolio.html. Detail view will be rendered once we have something in url other than root.</p>
 
-<h3>Templating</h3>
+<h3 id="templating">Templating</h3>
 
 <p>If you using some templating framework on the back end default start and end simple may collide and will have to use something else. This is why my app starts with:</p>
 
@@ -121,13 +121,13 @@ var myApp = angular.module('myApp', ['ngRoute','portfolioControllers'], function
 <pre><code>&lt;html ng-app="myApp"&gt; 
 </code></pre>
 
-<h3>JSON</h3>
+<h3 id="json">JSON</h3>
 
 <p>Initial idea was to use JSONP, but I could not find MongoDb provider with free and open API quickly, so I decided to pull JSON from good old SQL and store it with the website.</p>
 
 <p><a href="https://github.com/mikhailkozlov/mikhailkozlov.github.io/blob/master/components/js/portfolio.json">"Main" file</a> stores data that is need for list view and each project has it's <a href="https://github.com/mikhailkozlov/mikhailkozlov.github.io/tree/master/components/js/portfolio">own JSON file</a>.</p>
 
-<h3>AJAX</h3>
+<h3 id="ajax">AJAX</h3>
 
 <p>Since AngularJS does all the work, making list view take just a few lines of code</p>
 
@@ -158,7 +158,7 @@ function ($scope, $routeParams, $http) {
 
 <p>I had to add sceProvider to render html from JSON, probably not the best way around, but it does the job.</p>
 
-<h3>Done</h3>
+<h3 id="done">Done</h3>
 
 <p>That is pretty much all it takes to put one page app together.</p>
 </div>
@@ -220,7 +220,7 @@ function ($scope, $routeParams, $http) {
             <div class="col-lg-4">
                 <h4>My Bunker</h4>
                 <p>
-                    Bay Area, CA.
+                    Atlanta, GA.
                 </p>
             </div><!-- /col-lg-4 -->
 
@@ -237,7 +237,7 @@ function ($scope, $routeParams, $http) {
             <div class="col-lg-4">
                 <h4>Mikhail Kozlov</h4>
                 <p> <small>Developing for the web</small></p>
-                <p>&copy; 2014 Mikhail Kozlov<br>
+                <p>&copy; 2015 Mikhail Kozlov<br>
                     Theme by <a href="http://www.blacktie.co/" target="_blank" title="Free handsome Bootstrap themes for everyone. Because \"free\" doesn't always mean crappy.">BlackTie.co</a></p>
                 <span class="credit">Powered by <a href="http://sculpin.io">Sculpin</a></span>
             </div><!-- /col-lg-4 -->
