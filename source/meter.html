@@ -5,11 +5,23 @@ title: Power use | Mikhail Kozlov
 <h1>Home Power Use</h1>
 
 
-<div class="position: relative; width: 300px;">
-    <h2>EV Changer</h2>
-    <canvas id="foo"></canvas>
-    <div id="preview-textfield" style="
-    position: absolute;
+<div class="col-sm-12 col-md-6">
+    <h2>EV Changer: <span id="evcs_status"></span></h2>
+    <canvas id="evcs"></canvas>
+    <div id="evcs-preview-textfield" style="
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+    width: 300px;
+">0.001kW
+    </div>
+</div>
+
+<div class="col-sm-12 col-md-6">
+    <h2>AC Fan: <span id="acfan_status"></span></h2>
+    <canvas id="acfan"></canvas>
+    <div id="acfan-preview-textfield" style="
     text-align: center;
     font-size: 2em;
     font-weight: bold;
@@ -39,16 +51,44 @@ title: Power use | Mikhail Kozlov
         generateGradient: true,
         percentColors: [[0.0, "#a9d70b"], [0.50, "#f9c802"], [1.0, "#ff0000"]]
     };
-    var target = document.getElementById('foo'); // your canvas element
-    var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-    gauge.maxValue = 8000; // set max gauge value
-    gauge.animationSpeed = 59; // set animation speed (32 is default value)
-    gauge.set(1); // set actual value
+
+    var targetEV = document.getElementById('evcs'); // your canvas element
+    var evGauge = new Gauge(targetEV).setOptions(opts); // create sexy gauge!
+    evGauge.maxValue = 8000; // set max gauge value
+    evGauge.animationSpeed = 59; // set animation speed (32 is default value)
+    evGauge.set(1); // set actual value
+
+    var targetFan = document.getElementById('acfan'); // your canvas element
+    var fanGauge = new Gauge(targetFan).setOptions(opts); // create sexy gauge!
+    fanGauge.maxValue = 1000; // set max gauge value
+    fanGauge.animationSpeed = 59; // set animation speed (32 is default value)
+    fanGauge.set(17); // set actual value
 
     var myFirebaseRef = new Firebase("https://vivid-heat-6441.firebaseio.com/");
-    myFirebaseRef.child("value").on("value", function (snapshot) {
-        gauge.set(snapshot.val()); // initial value
-        $('#preview-textfield').text(snapshot.val() / 1000 + 'kW')
+
+    // evcs
+    myFirebaseRef.child("evcs/status").on("value", function (snapshot) {
+        var state = snapshot.val();
+        evGauge.set(state.value); // initial value
+        $('#evcs-preview-textfield').text(state.value / 1000 + 'kW')
+        $('#evcs_status').text(state.status).data('time', state.time);
+        if (state.value > 100) {
+            $('#evcs_status').addClass('text-success').removeClass('text-danger');
+        } else {
+            $('#evcs_status').removeClass('text-success').addClass('text-danger');
+        }
+    });
+
+    myFirebaseRef.child("acfan/status").on("value", function (snapshot) {
+        var state = snapshot.val();
+        fanGauge.set(state.value); // initial value
+        $('#acfan-preview-textfield').text(state.value / 1000 + 'kW')
+        $('#acfan_status').text(state.status).data('time', state.time);
+        if (state.value > 100) {
+            $('#acfan_status').addClass('text-success').removeClass('text-danger');
+        } else {
+            $('#acfan_status').removeClass('text-success').addClass('text-danger');
+        }
     });
 
 
