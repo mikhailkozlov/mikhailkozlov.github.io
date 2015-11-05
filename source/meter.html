@@ -1,0 +1,55 @@
+---
+layout: base
+title: Power use | Mikhail Kozlov
+---
+<h1>Home Power Use</h1>
+
+
+<div class="position: relative; width: 300px;">
+    <h2>EV Changer</h2>
+    <canvas id="foo"></canvas>
+    <div id="preview-textfield" style="
+    position: absolute;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+    width: 300px;
+">0.001kW
+    </div>
+</div>
+
+
+<script src="/components/js/gauge.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+<script>
+    var opts = {
+        lines: 12, // The number of lines to draw
+        angle: 0, // The length of each line
+        lineWidth: 0.23, // The line thickness
+        pointer: {
+            length: 0.9, // The radius of the inner circle
+            strokeWidth: 0.035, // The rotation offset
+            color: '#000000' // Fill color
+        },
+        limitMax: 'false',   // If true, the pointer will not go past the end of the gauge
+        colorStart: '#cc5200',   // Colors
+        colorStop: '#cc5200',    // just experiment with them
+        strokeColor: '#E0E0E0',   // to see which ones work best for you
+        generateGradient: true,
+        percentColors: [[0.0, "#a9d70b"], [0.50, "#f9c802"], [1.0, "#ff0000"]]
+    };
+    var target = document.getElementById('foo'); // your canvas element
+    var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+    gauge.maxValue = 8000; // set max gauge value
+    gauge.animationSpeed = 59; // set animation speed (32 is default value)
+    gauge.set(1); // set actual value
+
+    var myFirebaseRef = new Firebase("https://vivid-heat-6441.firebaseio.com/");
+    myFirebaseRef.child("value").on("value", function (snapshot) {
+        gauge.set(snapshot.val()); // initial value
+        $('#preview-textfield').text(snapshot.val() / 1000 + 'kW')
+    });
+
+
+</script>
