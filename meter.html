@@ -8,13 +8,13 @@
     <title>Home</title>
 
     <!-- Vendor styles -->
-    <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/components/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/components/css/bootstrap.min.css"/>
 
     <!-- App styles -->
-    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"/>
-    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/helper.css"/>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="/components/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"/>
+    <link rel="stylesheet" href="/components/fonts/pe-icon-7-stroke/css/helper.css"/>
+    <link rel="stylesheet" href="/components/css/style.css">
     <style>
         /* Charts */
         .flot-chart {
@@ -26,9 +26,7 @@
 
 </head>
 <body>
-
 <div>
-
     <div class="content" id="app">
         <div class="row" v-for="sensor in sensors">
             <sensor inline-template :sensor="sensor">
@@ -36,10 +34,10 @@
                     <div class="hpanel">
                         <div class="panel-heading">
                             <div class="panel-tools">
-                                @{{ sensor.status.status }} <span v-bind:class="statusClass"><i
+                                {{ sensor.status.status }} <span v-bind:class="statusClass"><i
                                     class="fa fa-circle"></i></span>
                             </div>
-                            @{{ sensorName  }}: Information and statistics
+                            {{ sensorName  }}: Information and statistics
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -51,7 +49,7 @@
                                             </div>
                                             <div>
                                                 <h1 class="font-extra-bold m-t-xl m-b-xs">
-                                                    @{{ sensor.stats.today }}
+                                                    {{ sensor.stats.today }}
                                                 </h1>
                                                 <small>kWh</small>
                                             </div>
@@ -64,7 +62,7 @@
                                     </div>
                                     <div class="flot-chart">
                                         <div>
-                                            <canvas height="70" id="chart-@{{sensor.id}}"></canvas>
+                                            <canvas height="70" id="chart-{{sensor.id}}"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +72,7 @@
                                     </div>
                                     <div>
                                         <h1 class="font-extra-bold m-t-xl m-b-xs">
-                                            @{{ sensor.stats.thisMonth }}
+                                            {{ sensor.stats.thisMonth }}
                                         </h1>
                                         <small>kWh</small>
                                     </div>
@@ -83,7 +81,7 @@
                         </div>
 
                         <div class="panel-footer">
-                            Last update: <span>@{{ statusTime }}</span>
+                            Last update: <span>{{ statusTime }}</span>
                         </div>
                     </div>
                 </div>
@@ -104,13 +102,15 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-<script src="vendor/jquery/dist/jquery.min.js"></script>
-<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="vendor/chartjs/Chart.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
 <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 <!-- App scripts -->
-<script src="scripts/homer.js"></script>
+<script src="/components/js/homer.js"></script>
 
 <script>
     /**
