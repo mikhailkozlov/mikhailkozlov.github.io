@@ -27,86 +27,111 @@
 </head>
 <body>
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-2184329-11', 'auto');
     ga('send', 'pageview');
 
 </script>
-<div>
-    <div class="content" id="app">
-        <div class="row" v-for="sensor in sensors">
-            <sensor inline-template :sensor="sensor">
-                <div class="col-lg-12">
-                    <div class="hpanel">
-                        <div class="panel-heading">
-                            <div class="panel-tools">
-                                {{ sensor.status.status }} <span v-bind:class="statusClass"><i
-                                    class="fa fa-circle"></i></span>
-                            </div>
-                            {{ sensorName  }}: Information and statistics
+<div class="content" id="app">
+    <div class="row" v-for="sensor in sensors">
+        <sensor inline-template :sensor="sensor">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            @{{ sensor.status.status }} <span v-bind:class="statusClass"><i
+                                class="fa fa-circle"></i></span>
                         </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        <div class="col-xs-12 text-center">
-                                            <div class="small">
-                                                <i class="fa fa-bolt"></i> Today
-                                            </div>
-                                            <div>
-                                                <h1 class="font-extra-bold m-t-xl m-b-xs">
-                                                    {{ sensor.stats.today }}
-                                                </h1>
-                                                <small>kWh</small>
-                                            </div>
+                        @{{ sensorName }}: Information and statistics
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        <div class="small">
+                                            <i class="fa fa-bolt"></i> Today
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="text-center small">
-                                        <i class="fa fa-laptop"></i> Energy Consumption
-                                    </div>
-                                    <div class="flot-chart">
+                                        <div class="m-b-md">
+                                            <h1 class="font-extra-bold m-t-md m-b-xs">
+                                                @{{ sensor.stats.today }}
+                                            </h1>
+                                            <small>kWh</small>
+                                        </div>
+                                        <div class="small">
+                                            <i class="fa fa-bolt"></i> This Week
+                                        </div>
                                         <div>
-                                            <canvas height="70" id="chart-{{sensor.id}}"></canvas>
+                                            <h3 class="font-extra-bold m-t-sm m-b-xs">
+                                                @{{ sensor.stats.thisWeek }}
+                                            </h3>
+                                            <small>kWh</small>
                                         </div>
                                     </div>
+
                                 </div>
-                                <div class="col-md-3 text-center">
-                                    <div class="small">
-                                        <i class="fa fa-bolt"></i> This Month
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-center small">
+                                    <i class="fa fa-laptop"></i> Energy Consumption
+                                </div>
+                                <div class="flot-chart">
                                     <div>
-                                        <h1 class="font-extra-bold m-t-xl m-b-xs">
-                                            {{ sensor.stats.thisMonth }}
-                                        </h1>
-                                        <small>kWh</small>
+                                        <canvas height="70" id="chart-@{{sensor.id}}"></canvas>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="panel-footer">
-                            Last update: <span>{{ statusTime }}</span>
+                            <div class="col-md-3 text-center">
+                                <div class="small">
+                                    <i class="fa fa-bolt"></i> This Month
+                                </div>
+                                <div class="m-b-md">
+                                    <h1 class="font-extra-bold m-t-md m-b-xs">
+                                        @{{ sensor.stats.thisMonth }}
+                                    </h1>
+                                    <small>kWh</small>
+                                </div>
+                                <div class="small">
+                                    <i class="fa fa-bolt"></i> Last Month
+                                </div>
+                                <div>
+                                    <h3 class="font-extra-bold m-t-sm m-b-xs">
+                                        @{{ sensor.stats.lastMonth }}
+                                    </h3>
+                                    <small>kWh</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="panel-footer">
+                        Last update: <span>@{{ statusTime }}</span>
+                    </div>
                 </div>
-            </sensor>
-        </div>
-        <!-- Footer-->
-        <footer class="footer">
+            </div>
+        </sensor>
+    </div>
+    <!-- Footer-->
+    <footer class="footer">
         <span class="pull-right">
             &copy <a href="http://mikhailkozlov.com/">Mikhail Kozlov</a>
         </span>
-            <a href="http://mikhailkozlov.com/">Home</a> | <a href="http://mikhailkozlov.com/blog/">Blog</a> | <a href="http://mikhailkozlov.com/portfolio/#/">Portfolio</a>
-        </footer>
-    </div>
+        <a href="http://mikhailkozlov.com/">Home</a> | <a href="http://mikhailkozlov.com/blog/">Blog</a> | <a
+            href="http://mikhailkozlov.com/portfolio/#/">Portfolio</a>
+    </footer>
+</div>
 
-</body>
 
 <!-- Vendor scripts -->
 
@@ -115,12 +140,14 @@
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+        integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
 <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 <!-- App scripts -->
-<script src="/components/js/homer.js"></script>
+<script src="scripts/homer.js"></script>
 
 <script>
     /**
@@ -159,11 +186,14 @@
         ready: function () {
             var self = this;
 
-            // call chart
-            self.$emit('chart', this.sensor.id, this.sensor.log);
+//            // call chart
+//            this.sensor.log = _.slice(this.sensor.log, (this.sensor.log.length - 30));
+//            self.$emit('chart', this.sensor.id, this.sensor.log);
 
             // listen to log updates
-            myFirebaseRef.child(this.sensor.id + "/log").on("value", function (snapshot) {
+            var logRef = myFirebaseRef.child(this.sensor.id + "/log");
+            var lastMessagesQuery = logRef.limitToLast(30);
+            lastMessagesQuery.on("value", function (snapshot) {
                 self.$emit('chart', self.sensor.id, snapshot.val());
             });
 
@@ -206,6 +236,7 @@
                 };
 
                 var ctx = document.getElementById("chart-" + id).getContext("2d");
+                // @TODO - we need to clear out canvas or re-write the code to only update and add new data
                 var myNewChart = new Chart(ctx).Bar(singleBarData, singleBarOptions);
             }
         },
@@ -254,4 +285,5 @@
     })
 
 </script>
+</body>
 </html>
