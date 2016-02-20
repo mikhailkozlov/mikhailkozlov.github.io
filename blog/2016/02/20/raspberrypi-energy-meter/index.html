@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-                        Category Archive &mdash; Mikhail Kozlov
+                        RaspberryPi Energy Meter &mdash; Mikhail Kozlov
             </title>        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700,600" rel="stylesheet" type="text/css">
     <link href="/components/source/css/site.css?s=1.0.12" rel="stylesheet" type="text/css" />
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -46,37 +46,71 @@
                 
     <div class="container">
     <div class="col-md-8 col-lg-8">
-                    <h1>Personal</h1>
-        <h3>February 2016</h3>
-<article>
-  <div>
-      <a href="/blog/2016/02/20/raspberrypi-energy-meter">RaspberryPi Energy Meter</a>
-        <p></p>
-  </div>
-</article>
-        <h3>July 2014</h3>
-<article>
-  <div>
-      <a href="/blog/2014/07/11/angularjs-experiment">AngularJS Experiment</a>
-        <p></p>
-  </div>
-</article>
-<article>
-  <div>
-      <a href="/blog/2014/07/07/moving-to-github">Moving to Github</a>
-        <p></p>
-  </div>
-</article>
-        <h3>December 2011</h3>
-<article>
-  <div>
-      <a href="/blog/2011/12/09/certified-certified-scrum-master">I’m Certified Certified Scrum Master!</a>
-        <p></p>
-  </div>
-</article>
+                    
+    <article class="hentry" role="article">
+        <h1 class="entry-title">RaspberryPi Energy Meter</h1>
+<div class="taxonomies"><small>
+      <span class="meta">
+          <time datetime="2016-02-20T00:00:00-08:00" pubdate>
+              <span class='month'>Feb</span> <span class='day'>20th</span> <span class='year'>2016</span>
+          </time>
+      </span>
 
-<div>
+                <span class="categories">
+        Categories:
+                <a href="/blog/categories/personal">personal</a>,                 <a href="/blog/categories/Energy%20Meter">Energy Meter</a>                </span>
+                <span class="tags">
+        Tags:
+                <a href="/blog/tags/side%20note">side note</a>,                 <a href="/blog/tags/RaspberryPi">RaspberryPi</a>,                 <a href="/blog/tags/Energy%20Meter">Energy Meter</a>,                 <a href="/blog/tags/Aeotec%20Z-Stick">Aeotec Z-Stick</a>,                 <a href="/blog/tags/Consept">Consept</a>                </span>
+        </small></div>
+  <div class="entry-content"><p>Have you ever wonder how much electricity is consumed by devices in your house and what are the patters of use? Or pehaps you have and EV car in garage that does not really tell you how much charge it takes? If you said yes to either one follow along.</p>
+
+<h2 id="intro">Intro</h2>
+
+<p>There is probably a dozen of ways to track energy from ready to use all-in-one devices to more developer friendly options like SmartThings. There is also an option to get components yourself and build it. This is what we're going to talk about.</p>
+
+<p><a href="/components/img/energy/energy_meter.jpg"><img src="/components/img/energy/energy_meter_small.jpg" alt="image" /></a></p>
+
+<h2 id="components">Components</h2>
+
+<p>After some clicking around, I found that Aeon Labs makes relativly inexpencive components that seem to work well. Originally set up consisted of two <a href="http://aeotec.com/z-wave-home-energy-measure">Aeotec Home Energy Meters</a> with <a href="http://aeotec.com/z-wave-usb-stick">USB Aeotec Z-Stick</a> on PC side. This means that not only I had run mac-mini all the time but also make sure that it stays up all the time. After a few month of back and forward I decided to opt out for Paspberry Pi. I got latest model, but I'm sure any model will do.</p>
+
+<h2 id="tools">Tools</h2>
+
+<p>Again, there are many options out there, but if you are not guru software developer, Node.js and PHP are probably the easiest to pick up. Fortunately OpenZWave maintains <a href="https://github.com/OpenZWave/node-openzwave-shared">node-openzwave-shared</a> library for Node.js. Node is fully capable to handle things on his own, but since I plan to run some rather complex operation on the server, I decided to keep code very simple on Node side and log data using http requests. To capture request I've picked PHP <a href="https://github.com/laravel/lumen">Lumen</a> framework since I'm most familiar with Laravel. In order to build interactive dashboard we're going to use <a href="https://www.firebase.com/">Firebase</a> service from Google and sprinkle some JS. So final result will look like this:</p>
+
+<p><a href="/meter"><img src="/components/img/energy/dashboard.jpg" alt="image" /></a></p>
+
+<h2 id="what-is-next">What is next</h2>
+
+<p>Next we're going to setup Raspberry Pi and get communication going between Raspberry Pi  and Z-Stick.</p>
 </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikhailkozlov'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </article>
+
+        <div class="row">
+        <nav class="article">
+            <ul class="pager">
+                                                <li class="next"><a class="previous" href="/blog/2014/07/11/angularjs-experiment" title="AngularJS Experiment"><span class="title">AngularJS Experiment</span></a></li>
+                            </ul>
+        </nav>
+    </div>
+    
+
 
             </div>
     <div class="col-md-3 col-lg-3 col-lg-offset-1">

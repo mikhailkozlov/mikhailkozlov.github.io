@@ -3,9 +3,37 @@
     <title><![CDATA[Mikhail Kozlov]]></title>
     <link href="/atom.xml" rel="self"/>
     <link href="/"/>
-    <updated>2016-01-15T05:55:50-08:00</updated>
+    <updated>2016-02-20T07:28:48-08:00</updated>
     <id>/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[RaspberryPi Energy Meter]]></title>
+            <link href="/blog/2016/02/20/raspberrypi-energy-meter"/>
+            <updated>2016-02-20T00:00:00-08:00</updated>
+            <id>/blog/2016/02/20/raspberrypi-energy-meter</id>
+            <content type="html"><![CDATA[<p>Have you ever wonder how much electricity is consumed by devices in your house and what are the patters of use? Or pehaps you have and EV car in garage that does not really tell you how much charge it takes? If you said yes to either one follow along.</p>
+
+<h2 id="intro">Intro</h2>
+
+<p>There is probably a dozen of ways to track energy from ready to use all-in-one devices to more developer friendly options like SmartThings. There is also an option to get components yourself and build it. This is what we're going to talk about.</p>
+
+<p><a href="/components/img/energy/energy_meter.jpg"><img src="/components/img/energy/energy_meter_small.jpg" alt="image" /></a></p>
+
+<h2 id="components">Components</h2>
+
+<p>After some clicking around, I found that Aeon Labs makes relativly inexpencive components that seem to work well. Originally set up consisted of two <a href="http://aeotec.com/z-wave-home-energy-measure">Aeotec Home Energy Meters</a> with <a href="http://aeotec.com/z-wave-usb-stick">USB Aeotec Z-Stick</a> on PC side. This means that not only I had run mac-mini all the time but also make sure that it stays up all the time. After a few month of back and forward I decided to opt out for Paspberry Pi. I got latest model, but I'm sure any model will do.</p>
+
+<h2 id="tools">Tools</h2>
+
+<p>Again, there are many options out there, but if you are not guru software developer, Node.js and PHP are probably the easiest to pick up. Fortunately OpenZWave maintains <a href="https://github.com/OpenZWave/node-openzwave-shared">node-openzwave-shared</a> library for Node.js. Node is fully capable to handle things on his own, but since I plan to run some rather complex operation on the server, I decided to keep code very simple on Node side and log data using http requests. To capture request I've picked PHP <a href="https://github.com/laravel/lumen">Lumen</a> framework since I'm most familiar with Laravel. In order to build interactive dashboard we're going to use <a href="https://www.firebase.com/">Firebase</a> service from Google and sprinkle some JS. So final result will look like this:</p>
+
+<p><a href="/meter"><img src="/components/img/energy/dashboard.jpg" alt="image" /></a></p>
+
+<h2 id="what-is-next">What is next</h2>
+
+<p>Next we're going to setup Raspberry Pi and get communication going between Raspberry Pi  and Z-Stick.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[AngularJS Experiment]]></title>
             <link href="/blog/2014/07/11/angularjs-experiment"/>
