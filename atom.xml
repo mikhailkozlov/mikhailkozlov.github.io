@@ -3,9 +3,66 @@
     <title><![CDATA[Mikhail Kozlov]]></title>
     <link href="/atom.xml" rel="self"/>
     <link href="/"/>
-    <updated>2016-02-20T07:28:48-08:00</updated>
+    <updated>2016-02-29T15:03:08-08:00</updated>
     <id>/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Request Rate Limiting in Lumen 5.2]]></title>
+            <link href="/blog/2016/02/29/request_rate _limiting_in_lumen_5"/>
+            <updated>2016-02-29T00:00:00-08:00</updated>
+            <id>/blog/2016/02/29/request_rate _limiting_in_lumen_5</id>
+            <content type="html"><![CDATA[<p>Lumen 5.2 is positioned as API friendly minimal framework with Laravel flavour. However when you start looking at API features you'll find that rate limiting that is present in Laravel 5.2 nowhere to be found in Lumen. This decision seems to be odd given the simplicity of implementation.</p>
+
+<p>If you look at Laravel 5.2, you'll find that it has Middleware called "throttle". This particular middleware is capable of limiting requests and works using internal cache system. If you look at file itself, you'll see that it looks like great opportunity for copy/paste and this is exactly what we're going to do.</p>
+
+<p>Let's grab <code>\Illuminate\Routing\Middleware\ThrottleRequests</code> from Laravel 5.2 installation. If you do not have Laravel 5.2 instalation handy, you can always <a href="https://github.com/laravel/framework/blob/5.2/src/Illuminate/Routing/Middleware/ThrottleRequests.php">head over to github</a> and grab file from there. Place file with the rest of your middleware files in <code>app/Http/Middleware</code>. Before this middleware can rate limit requests, we'll need to adjust it a bit. First of all we need to make sure it is namespaced correctly so change namespace to</p>
+
+<pre><code>namespace App\Http\Middleware;
+</code></pre>
+
+<p>Next we'll need to update how fingerprint is created. Let's take a look at <code>resolveRequestSignature</code> function. Out of the box Laravel calls <code>return $request-&gt;fingerprint();</code> but that function is missing in Lumen's Request implementation. Let's recreate it on middleware itself</p>
+
+<pre><code>protected function resolveRequestSignature($request)
+{
+    return sha1(
+        $request-&gt;method() .
+        '|' . $request-&gt;server('SERVER_NAME') .
+        '|' . $request-&gt;path() .
+        '|' . $request-&gt;ip()
+    );
+}
+</code></pre>
+
+<p>As you can see we take server name, path and IP to create unique "fingerprint" for the request. This value will be used as a key in storage and allow us to throttle requests.</p>
+
+<p>Next, run <code>composer dump-autoload</code> and open <code>bootstrap/app.php</code> file. We're going to need to make our new middleware available aka "register" it. You'll find some templates for registering middleware right in the file, so we're going to add our new right bellow examples:</p>
+
+<pre><code>$app-&gt;routeMiddleware([
+    'throttle' =&gt; App\Http\Middleware\ThrottleRequests::class,
+]);
+</code></pre>
+
+<p>Now we need some routes to throuttle. Head over to <code>app/Http/routes.php</code> and add new route</p>
+
+<pre><code>$app-&gt;group(['middleware' =&gt; 'throttle'], function () use ($app) {
+    $app-&gt;get('/', function () use ($app) {
+        return $app-&gt;version();
+    });
+});
+</code></pre>
+
+<p>Now we need to make sure we have cache driver set to something other then array and we can test it. File system is fine, so update your <code>.env</code> file with <code>CACHE_DRIVER=file</code>. Default rate is 60 request per min 1 and we probably need to bring it down to something we can actually replicate, so let's adjust the route to allow 2 request every minute:</p>
+
+<pre><code>$app-&gt;group(['middleware' =&gt; 'throttle:2,1'], function () use ($app) {
+    $app-&gt;get('/', function () use ($app) {
+        return $app-&gt;version();
+    });
+});
+</code></pre>
+
+<p>Now, if you hit your homepage 3 times in a row you'll see <code>Too Many Attempts</code> in your browser and <code>429</code> response code from the server.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[RaspberryPi Energy Meter]]></title>
             <link href="/blog/2016/02/20/raspberrypi-energy-meter"/>
