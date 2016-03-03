@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-                        Category Archive &mdash; Mikhail Kozlov
+                        Request Rate Limiting in Lumen 5.2 &mdash; Mikhail Kozlov
             </title>        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700,600" rel="stylesheet" type="text/css">
     <link href="/components/source/css/site.css?s=1.0.12" rel="stylesheet" type="text/css" />
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -46,24 +46,101 @@
                 
     <div class="container">
     <div class="col-md-8 col-lg-8">
-                    <h1>Energy meter</h1>
-        <h3>March 2016</h3>
-<article>
-  <div>
-      <a href="/blog/2016/03/03/raspberrypi-with-aeotec-z-stick">Setup RaspberryPi with Aeotec Z-Stick</a>
-        <p></p>
-  </div>
-</article>
-    <h3>February 2016</h3>
-<article>
-  <div>
-      <a href="/blog/2016/02/20/raspberrypi-energy-meter">RaspberryPi Energy Meter</a>
-        <p></p>
-  </div>
-</article>
+                    
+    <article class="hentry" role="article">
+        <h1 class="entry-title">Request Rate Limiting in Lumen 5.2</h1>
+<div class="taxonomies"><small>
+      <span class="meta">
+          <time datetime="2016-02-29T00:00:00-08:00" pubdate>
+              <span class='month'>Feb</span> <span class='day'>29th</span> <span class='year'>2016</span>
+          </time>
+      </span>
 
-<div>
+                <span class="categories">
+        Categories:
+                <a href="/blog/categories/personal">personal</a>                </span>
+                <span class="tags">
+        Tags:
+                <a href="/blog/tags/side%20note">side note</a>,                 <a href="/blog/tags/Lumen%205.2">Lumen 5.2</a>,                 <a href="/blog/tags/Lumen">Lumen</a>                </span>
+        </small></div>
+  <div class="entry-content"><p>Lumen 5.2 is possitioned as API friendly minimal framework with Laravel flavour. However when you start looking at API features you'll find that rate limiting that is present in Laravel 5.2 nowhere to be found in Lumen. This decision seems to be odd given the simplicity of implementation.</p>
+
+<p>If you look at Laravel 5.2, you'll find that it has Middleware called "throttle". This particular middleware is capable of limiting requests and works using internal cache system. If you look at file itself, you'll see that it looks like greate opportunity for copy/paste and this is exactly what we're going to do.</p>
+
+<p>Let's grab <code>\Illuminate\Routing\Middleware\ThrottleRequests</code> from Laravel 5.2 installation. If you do not have Laravel 5.2 instalation handy, you can always <a href="https://github.com/laravel/framework/blob/5.2/src/Illuminate/Routing/Middleware/ThrottleRequests.php">head over to github</a> and grab file from there. Place file with the rest of your middleware files in <code>app/Http/Middleware</code>. Before this middleware can rate limit requests, we'll need to adjust it a bit. First of all we need to make sure it is namespaced correctly so change namespcae to</p>
+
+<pre><code>namespace App\Http\Middleware;
+</code></pre>
+
+<p>Next we'll need to update how fingerprint is created. Let's take a look at <code>resolveRequestSignature</code> function. Out of the box Laravel calls <code>return $request-&gt;fingerprint();</code> but that function is missing in Lumen's Request implementation. Let's recreate it on middleware itself</p>
+
+<pre><code>protected function resolveRequestSignature($request)
+{
+    return sha1(
+        $request-&gt;method() .
+        '|' . $request-&gt;server('SERVER_NAME') .
+        '|' . $request-&gt;path() .
+        '|' . $request-&gt;ip()
+    );
+}
+</code></pre>
+
+<p>As you can see we take server name, path and IP to create unique "fingerprint" for the request. This value will be used as a key in storage and allow us to throttle requests.</p>
+
+<p>Next, run <code>composer dump-autoload</code> and open <code>bootstrap/app.php</code> file. We're going to need to make our new middleware available aka "register" it. You'll find some templates for registering middleware right in the file, so we're going to add our new right bellow examples:</p>
+
+<pre><code>$app-&gt;routeMiddleware([
+    'throttle' =&gt; App\Http\Middleware\ThrottleRequests::class,
+]);
+</code></pre>
+
+<p>Now we need some routes to throuttle. Head over to <code>app/Http/routes.php</code> and add new route</p>
+
+<pre><code>$app-&gt;group(['middleware' =&gt; 'throttle'], function () use ($app) {
+    $app-&gt;get('/', function () use ($app) {
+        return $app-&gt;version();
+    });
+});
+</code></pre>
+
+<p>Now we need to make sure we have cache driver set to something other then array and we can test it. File system is fine, so update your <code>.env</code> file with <code>CACHE_DRIVER=file</code>. Default rate is 60 request per min 1 and we probably need to bring it down to something we can actually replicate, so let's adjust the route to allow 2 request every minute:</p>
+
+<pre><code>$app-&gt;group(['middleware' =&gt; 'throttle:2,1'], function () use ($app) {
+    $app-&gt;get('/', function () use ($app) {
+        return $app-&gt;version();
+    });
+});
+</code></pre>
+
+<p>Now, if you hit your homepage 3 times in a row you'll see <code>Too Many Attempts</code> in your browser and <code>429</code> response code from the server.</p>
 </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikhailkozlov'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </article>
+
+        <div class="row">
+        <nav class="article">
+            <ul class="pager">
+                                <li class="previous"><a class="next" href="/blog/2016/03/03/raspberrypi-with-aeotec-z-stick" title="Setup RaspberryPi with Aeotec Z-Stick"><span class="title">Setup RaspberryPi with Aeotec Z-Stick</span></a></li>
+                                                <li class="next"><a class="previous" href="/blog/2016/02/20/raspberrypi-energy-meter" title="RaspberryPi Energy Meter"><span class="title">RaspberryPi Energy Meter</span></a></li>
+                            </ul>
+        </nav>
+    </div>
+    
+
 
             </div>
     <div class="col-md-3 col-lg-3 col-lg-offset-1">
