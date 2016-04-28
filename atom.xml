@@ -3,7 +3,7 @@
     <title><![CDATA[Mikhail Kozlov]]></title>
     <link href="/atom.xml" rel="self"/>
     <link href="/"/>
-    <updated>2016-04-28T11:08:49-07:00</updated>
+    <updated>2016-04-28T11:11:52-07:00</updated>
     <id>/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -15,7 +15,7 @@
 
 <h2 id="node.js-as-a-service">Node.js as a Service</h2>
 
-<p>It is no secret that making sure that you data is flowing is biggest consurn for reliable statiscicts (and pretty pictures). Fortunately systemd now available on all popular Linux distributions so we do not have to write much. Mike MacCana has a <a href="https://certsimple.com/blog/deploy-node-on-linux#node-linux-service-systemd">great write up on bigger subject of Node.js as service</a> but we're going to user only interesting to us part.</p>
+<p>It is no secret that making sure that you data is flowing is biggest concern for reliable statistics (and pretty pictures). Fortunately systemd now available on all popular Linux distributions so we do not have to write much. Mike MacCana has a <a href="https://certsimple.com/blog/deploy-node-on-linux#node-linux-service-systemd">great write up on bigger subject of Node.js as service</a> but we're going to user only interesting to us part.</p>
 
 <h2 id="service.js">Service.js</h2>
 
