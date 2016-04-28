@@ -3,9 +3,52 @@
     <title><![CDATA[Mikhail Kozlov]]></title>
     <link href="/atom.xml" rel="self"/>
     <link href="/"/>
-    <updated>2016-03-02T15:44:59-08:00</updated>
+    <updated>2016-04-28T11:08:49-07:00</updated>
     <id>/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Running Node.js as a Service]]></title>
+            <link href="/blog/2016/04/28/running-nodejs-as-a-service"/>
+            <updated>2016-04-28T00:00:00-07:00</updated>
+            <id>/blog/2016/04/28/running-nodejs-as-a-service</id>
+            <content type="html"><![CDATA[<p>Now that <a href="/blog/2016/02/20/raspberrypi-energy-meter/">we have</a> <a href="https://www.raspberrypi.org/products/raspberry-pi-2-model-b/">Raspberry Pi 2 Model B</a>, <a href="http://aeotec.com/z-wave-usb-stick">Aeotec Z-Stick</a> and <a href="http://aeotec.com/z-wave-home-energy-measure">Aeotec Z-Wave Home Energy Meter</a>s talking to each other we need to make sure we can listen.</p>
+
+<h2 id="node.js-as-a-service">Node.js as a Service</h2>
+
+<p>It is no secret that making sure that you data is flowing is biggest consurn for reliable statiscicts (and pretty pictures). Fortunately systemd now available on all popular Linux distributions so we do not have to write much. Mike MacCana has a <a href="https://certsimple.com/blog/deploy-node-on-linux#node-linux-service-systemd">great write up on bigger subject of Node.js as service</a> but we're going to user only interesting to us part.</p>
+
+<h2 id="service.js">Service.js</h2>
+
+<p>Service.js is set to <code>value changed</code> event on meters. Furthermore it is only looking for changes in power and energy. Once event occurs and it is power or energy change it will send HTTP request to Lumen based logging service. You can test script by running</p>
+
+<pre><code>node service.js
+</code></pre>
+
+<p>Now, you can check MySQL to see if data is inserted in tables. By default logging is turn off, so if you see any issue, it is probably good to uncomment <code>console.log</code> parts of the service.js. Once you sure that data is making its way into SQL, it is time to hand off service monitoring to operation system.</p>
+
+<h2 id="service-definition">Service Definition</h2>
+
+<p>You can find example service definition <a href="https://github.com/mikhailkozlov/myhome/blob/pi/myapp.service">myapp.service in github repo</a>. Depending on your setup you'll have to update path and copy your service file into the <code>/etc/systemd/system</code> directory. Then run</p>
+
+<pre><code>systemctl daemon-reload
+</code></pre>
+
+<p>to let systemd know about new service and start your service:</p>
+
+<pre><code>systemctl start myapp
+</code></pre>
+
+<p>It is important that there is no other connections to Z-stick at the same time. Systemd will quietly fail if you have another script with open connection.</p>
+
+<h2 id="working-with-service">Working with service</h2>
+
+<p>Just like with any other service, you can use <code>start</code>, <code>stop</code> commands to start or stop service.</p>
+
+<h2 id="what-is-next">What is next</h2>
+
+<p>Next we're going to look at setting up NoSQL storage service to power up dashboard.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Setup RaspberryPi with Aeotec Z-Stick]]></title>
             <link href="/blog/2016/03/03/raspberrypi-with-aeotec-z-stick"/>
@@ -186,7 +229,7 @@ ls -la
 
 <h2 id="what-is-next">What is next</h2>
 
-<p>Next we're going to look at setting up service to run our node monitor and getting the rest of web interface up.</p>
+<p>Next we're going to look at <a href="/blog/2016/04/28/running-nodejs-as-a-service/">setting up service to run our node monitor</a> and getting the rest of web interface up.</p>
 ]]></content>
         </entry>
             <entry>
@@ -521,14 +564,6 @@ Both of them take two parameters $post and $options. $post is WordPress post obj
 </code></pre>
 
 <p>Code may be not the most robust, but it does the job for me. You can simply replace line 601 <code>($this-&gt;wheres['_id'] = new MongoId($this-&gt;wheres['_id']);)</code> with the code above or clone my repo on <a href="https://github.com/">github.com</a>. Let me know what you think down bellow or open an <a href="https://github.com/315design/codeigniter-mongodb-library/issues">issue</a>.</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[Picasa Albums is now on WordPress.org]]></title>
-            <link href="/blog/2011/01/17/picasa-albums-is-now-on-wordpress-org"/>
-            <updated>2011-01-17T00:00:00-08:00</updated>
-            <id>/blog/2011/01/17/picasa-albums-is-now-on-wordpress-org</id>
-            <content type="html"><![CDATA[<p>Picasa Albums For WordPress 3 is now on WordPress.org. Head over to <a href="http://wordpress.org/extend/plugins/picasa-albums/">Picasa Album page</a> to get the latest code or search for "Picasa Album" in your plugin section.</p>
 ]]></content>
         </entry>
     </feed>

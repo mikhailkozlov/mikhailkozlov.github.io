@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-                        Tag Archive &mdash; Mikhail Kozlov
+                        Running Node.js as a Service &mdash; Mikhail Kozlov
             </title>        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700,600" rel="stylesheet" type="text/css">
     <link href="/components/source/css/site.css?s=1.0.12" rel="stylesheet" type="text/css" />
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -46,22 +46,86 @@
                 
     <div class="container">
     <div class="col-md-8 col-lg-8">
-                    <h1>Tag "Aeotec Z-Stick"</h1>
-        <h3>April 2016</h3>
-<article>
-  <div><a href="/blog/2016/04/28/running-nodejs-as-a-service">Running Node.js as a Service</a></div>
-</article>
-    <h3>March 2016</h3>
-<article>
-  <div><a href="/blog/2016/03/03/raspberrypi-with-aeotec-z-stick">Setup RaspberryPi with Aeotec Z-Stick</a></div>
-</article>
-    <h3>February 2016</h3>
-<article>
-  <div><a href="/blog/2016/02/20/raspberrypi-energy-meter">RaspberryPi Energy Meter</a></div>
-</article>
+                    
+    <article class="hentry" role="article">
+        <h1 class="entry-title">Running Node.js as a Service</h1>
+<div class="taxonomies"><small>
+      <span class="meta">
+          <time datetime="2016-04-28T00:00:00-07:00" pubdate>
+              <span class='month'>Apr</span> <span class='day'>28th</span> <span class='year'>2016</span>
+          </time>
+      </span>
 
-<div>
+                <span class="categories">
+        Categories:
+                <a href="/blog/categories/personal">personal</a>,                 <a href="/blog/categories/Energy%20Meter">Energy Meter</a>                </span>
+                <span class="tags">
+        Tags:
+                <a href="/blog/tags/side%20note">side note</a>,                 <a href="/blog/tags/RaspberryPi">RaspberryPi</a>,                 <a href="/blog/tags/Energy%20Meter">Energy Meter</a>,                 <a href="/blog/tags/Aeotec%20Z-Stick">Aeotec Z-Stick</a>,                 <a href="/blog/tags/Concept">Concept</a>,                 <a href="/blog/tags/Node.js">Node.js</a>                </span>
+        </small></div>
+  <div class="entry-content"><p>Now that <a href="/blog/2016/02/20/raspberrypi-energy-meter/">we have</a> <a href="https://www.raspberrypi.org/products/raspberry-pi-2-model-b/">Raspberry Pi 2 Model B</a>, <a href="http://aeotec.com/z-wave-usb-stick">Aeotec Z-Stick</a> and <a href="http://aeotec.com/z-wave-home-energy-measure">Aeotec Z-Wave Home Energy Meter</a>s talking to each other we need to make sure we can listen.</p>
+
+<h2 id="node.js-as-a-service">Node.js as a Service</h2>
+
+<p>It is no secret that making sure that you data is flowing is biggest consurn for reliable statiscicts (and pretty pictures). Fortunately systemd now available on all popular Linux distributions so we do not have to write much. Mike MacCana has a <a href="https://certsimple.com/blog/deploy-node-on-linux#node-linux-service-systemd">great write up on bigger subject of Node.js as service</a> but we're going to user only interesting to us part.</p>
+
+<h2 id="service.js">Service.js</h2>
+
+<p>Service.js is set to <code>value changed</code> event on meters. Furthermore it is only looking for changes in power and energy. Once event occurs and it is power or energy change it will send HTTP request to Lumen based logging service. You can test script by running</p>
+
+<pre><code>node service.js
+</code></pre>
+
+<p>Now, you can check MySQL to see if data is inserted in tables. By default logging is turn off, so if you see any issue, it is probably good to uncomment <code>console.log</code> parts of the service.js. Once you sure that data is making its way into SQL, it is time to hand off service monitoring to operation system.</p>
+
+<h2 id="service-definition">Service Definition</h2>
+
+<p>You can find example service definition <a href="https://github.com/mikhailkozlov/myhome/blob/pi/myapp.service">myapp.service in github repo</a>. Depending on your setup you'll have to update path and copy your service file into the <code>/etc/systemd/system</code> directory. Then run</p>
+
+<pre><code>systemctl daemon-reload
+</code></pre>
+
+<p>to let systemd know about new service and start your service:</p>
+
+<pre><code>systemctl start myapp
+</code></pre>
+
+<p>It is important that there is no other connections to Z-stick at the same time. Systemd will quietly fail if you have another script with open connection.</p>
+
+<h2 id="working-with-service">Working with service</h2>
+
+<p>Just like with any other service, you can use <code>start</code>, <code>stop</code> commands to start or stop service.</p>
+
+<h2 id="what-is-next">What is next</h2>
+
+<p>Next we're going to look at setting up NoSQL storage service to power up dashboard.</p>
 </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikhailkozlov'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </article>
+
+        <div class="row">
+        <nav class="article">
+            <ul class="pager">
+                                                <li class="next"><a class="previous" href="/blog/2016/03/03/raspberrypi-with-aeotec-z-stick" title="Setup RaspberryPi with Aeotec Z-Stick"><span class="title">Setup RaspberryPi with Aeotec Z-Stick</span></a></li>
+                            </ul>
+        </nav>
+    </div>
+    
+
 
             </div>
     <div class="col-md-3 col-lg-3 col-lg-offset-1">
