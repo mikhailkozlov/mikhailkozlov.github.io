@@ -36,4 +36,4 @@ Again, there are many options out there, but if you are not guru software develo
 
 ## What is next
 
-Next we're going to setup Raspberry Pi and get communication going between Raspberry Pi  and Z-Stick. 
+[Next we're going to setup Raspberry Pi](blog/2016/03/03/raspberrypi-with-aeotec-z-stick/) and get communication going between Raspberry Pi  and Z-Stick.
