@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-                        Running Node.js as a Service &mdash; Mikhail Kozlov
+                        Moving From Google Photos to Amazon Prime Photos &mdash; Mikhail Kozlov
             </title>        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700,600" rel="stylesheet" type="text/css">
     <link href="/components/source/css/site.css?s=1.0.12" rel="stylesheet" type="text/css" />
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -48,57 +48,50 @@
     <div class="col-md-8 col-lg-8">
                     
     <article class="hentry" role="article">
-        <h1 class="entry-title">Running Node.js as a Service</h1>
+        <h1 class="entry-title">Moving From Google Photos to Amazon Prime Photos</h1>
 <div class="taxonomies"><small>
       <span class="meta">
-          <time datetime="2016-04-28T00:00:00-07:00" pubdate>
-              <span class='month'>Apr</span> <span class='day'>28th</span> <span class='year'>2016</span>
+          <time datetime="2016-10-20T00:00:00-07:00" pubdate>
+              <span class='month'>Oct</span> <span class='day'>20th</span> <span class='year'>2016</span>
           </time>
       </span>
 
                 <span class="categories">
         Categories:
-                <a href="/blog/categories/personal">personal</a>,                 <a href="/blog/categories/Energy%20Meter">Energy Meter</a>                </span>
+                <a href="/blog/categories/personal">personal</a>,                 <a href="/blog/categories/how-to">how-to</a>                </span>
                 <span class="tags">
         Tags:
-                <a href="/blog/tags/side%20note">side note</a>,                 <a href="/blog/tags/RaspberryPi">RaspberryPi</a>,                 <a href="/blog/tags/Energy%20Meter">Energy Meter</a>,                 <a href="/blog/tags/Aeotec%20Z-Stick">Aeotec Z-Stick</a>,                 <a href="/blog/tags/Concept">Concept</a>,                 <a href="/blog/tags/Node.js">Node.js</a>                </span>
+                <a href="/blog/tags/side%20note">side note</a>,                 <a href="/blog/tags/Google%20Photos">Google Photos</a>,                 <a href="/blog/tags/Amazon%20Prime%20Photos">Amazon Prime Photos</a>                </span>
         </small></div>
-  <div class="entry-content"><p>Now that <a href="/blog/2016/02/20/raspberrypi-energy-meter/">we have</a> <a href="https://www.raspberrypi.org/products/raspberry-pi-2-model-b/">Raspberry Pi 2 Model B</a>, <a href="http://aeotec.com/z-wave-usb-stick">Aeotec Z-Stick</a> and <a href="http://aeotec.com/z-wave-home-energy-measure">Aeotec Z-Wave Home Energy Meter</a>s talking to each other we need to make sure we can listen.</p>
+  <div class="entry-content"><p>Back when <a href="https://picasa.google.com/">Picasa Web</a> was still new and cool I decided to move my picture to that service. Back then I only had a handful of picture that I wanted to share with friends and family. 
+As time went on my family grew and number of images exploded exponentially. Likely it was still under 100Gb and Google's 1.99$/month option was not that big of a deal. Even once I passed that mark splitting images between wife and myself helped to keep cost down. But here we're again at the edge of moving to next tier. At 9.99$/month 1TB plan makes you wonder if there's another option.</p>
 
-<h2 id="node.js-as-a-service">Node.js as a Service</h2>
+<p>To be honest I was looking at CloudDrive for a while now. At 60$/year it is looked like pretty good option considering unlimited storage, but lack of feature and ability to share account 
+always stopped me from jumping on board. This is where Amazon Prime Photos come in. Yes, 
+Amazon Prime Photos just fancy version of CloudDrive but it is geared towards images and let's you add up to 5 people to the account. Sign me up!</p>
 
-<p>It is no secret that making sure that you data is flowing is biggest concern for reliable statistics (and pretty pictures). Fortunately systemd now available on all popular Linux distributions so we do not have to write much. Mike MacCana has a <a href="https://certsimple.com/blog/deploy-node-on-linux#node-linux-service-systemd">great write up on bigger subject of Node.js as service</a> but we're going to user only interesting to us part.</p>
+<p>Now I that have 3 accounts I pay for, how do I actually make it cheaper?. Move everything into Amazon of course. Turns out it is easier said than done. Moving 250+Gb 
+of images and videos from multiple cloud accounts and physical machines proved to be rather tedious.</p>
 
-<h2 id="service.js">Service.js</h2>
+<p>as it turns out there is no direct connector yet, so you need to download images from all clouds and then upload them into Amazon cloud. 
+Some may think that with Google Takeout it would be just a matter of clicking few buttons and done. Well, yes, it is probably going to work if 
+you have a few gigs of data, but with 140+Gb in each account it did not work as advertised.</p>
 
-<p>Service.js is set to <code>value changed</code> event on meters. Furthermore it is only looking for changes in power and energy. Once event occurs and it is power or energy change it will send HTTP request to Lumen based logging service. You can test script by running</p>
+<p>Once you start the process, you will learn that not all backups result in full backup. Google will let you know that some files are missing. 
+On top of that it will split backup into 2Gb chunks and you can download each chunk only 5 times. Downloading 150+ individual files is not fun. 
+On top of that downloads will timeout, you will have to login every 10 or 15 files, and most importantly getting down data is painfully slow.</p>
 
-<pre><code>node service.js
-</code></pre>
+<p>Once get files down you will find another surprise. Once unpacked each chunk will create full tree of all albums and 
+spread images into random folders with ton of json files on top of that. Last part is really confusing. After 5 (yes FIVE) attempts at Takeout I was wondering if there is a better way.</p>
 
-<p>Now, you can check MySQL to see if data is inserted in tables. By default logging is turn off, so if you see any issue, it is probably good to uncomment <code>console.log</code> parts of the service.js. Once you sure that data is making its way into SQL, it is time to hand off service monitoring to operation system.</p>
+<p>Turns out there is. In Google Drive you can create folder for Google Photos that will automatically put your Google Photos into a folder inside your Drive. 
+This process is much faster than getting archive from Takeout.</p>
 
-<h2 id="service-definition">Service Definition</h2>
+<p><img src="http://content.screencast.com/users/mkozlov/folders/Jing/media/0e0c1a0d-e7d6-4b9c-a441-c5e5b1c9ac8f/00000467.png" alt="image" /></p>
 
-<p>You can find example service definition <a href="https://github.com/mikhailkozlov/myhome/blob/pi/myapp.service">myapp.service in github repo</a>. Depending on your setup you'll have to update path and copy your service file into the <code>/etc/systemd/system</code> directory. Then run</p>
+<p>On top of that you can now get Google Drive App for your operating system and download entire folder onto your machine without every touching any files. No need to unzip or collect bits and pieces either. Very nice and fast-ish.</p>
 
-<pre><code>systemctl daemon-reload
-</code></pre>
-
-<p>to let systemd know about new service and start your service:</p>
-
-<pre><code>systemctl start myapp
-</code></pre>
-
-<p>It is important that there is no other connections to Z-stick at the same time. Systemd will quietly fail if you have another script with open connection.</p>
-
-<h2 id="working-with-service">Working with service</h2>
-
-<p>Just like with any other service, you can use <code>start</code>, <code>stop</code> commands to start or stop service.</p>
-
-<h2 id="what-is-next">What is next</h2>
-
-<p>Next we're going to look at setting up NoSQL storage service to power up dashboard.</p>
+<p>Now that we have files on HDD, it is time to fire up your Amazon Drive App and watch files fly back into the cloud.</p>
 </div>
 
     <div id="disqus_thread"></div>
@@ -120,8 +113,7 @@
         <div class="row">
         <nav class="article">
             <ul class="pager">
-                                <li class="previous"><a class="next" href="/blog/2016/10/20/moving_form_google_photos_to_amazon_photos" title="Moving From Google Photos to Amazon Prime Photos"><span class="title">Moving From Google Photos to Amazon Prime Photos</span></a></li>
-                                                <li class="next"><a class="previous" href="/blog/2016/03/03/raspberrypi-with-aeotec-z-stick" title="Setup RaspberryPi with Aeotec Z-Stick"><span class="title">Setup RaspberryPi with Aeotec Z-Stick</span></a></li>
+                                                <li class="next"><a class="previous" href="/blog/2016/04/28/running-nodejs-as-a-service" title="Running Node.js as a Service"><span class="title">Running Node.js as a Service</span></a></li>
                             </ul>
         </nav>
     </div>

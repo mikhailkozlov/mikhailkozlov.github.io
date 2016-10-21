@@ -3,9 +3,45 @@
     <title><![CDATA[Mikhail Kozlov]]></title>
     <link href="/atom.xml" rel="self"/>
     <link href="/"/>
-    <updated>2016-08-24T06:56:21-07:00</updated>
+    <updated>2016-10-20T17:16:02-07:00</updated>
     <id>/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Moving From Google Photos to Amazon Prime Photos]]></title>
+            <link href="/blog/2016/10/20/moving_form_google_photos_to_amazon_photos"/>
+            <updated>2016-10-20T00:00:00-07:00</updated>
+            <id>/blog/2016/10/20/moving_form_google_photos_to_amazon_photos</id>
+            <content type="html"><![CDATA[<p>Back when <a href="https://picasa.google.com/">Picasa Web</a> was still new and cool I decided to move my picture to that service. Back then I only had a handful of picture that I wanted to share with friends and family. 
+As time went on my family grew and number of images exploded exponentially. Likely it was still under 100Gb and Google's 1.99$/month option was not that big of a deal. Even once I passed that mark splitting images between wife and myself helped to keep cost down. But here we're again at the edge of moving to next tier. At 9.99$/month 1TB plan makes you wonder if there's another option.</p>
+
+<p>To be honest I was looking at CloudDrive for a while now. At 60$/year it is looked like pretty good option considering unlimited storage, but lack of feature and ability to share account 
+always stopped me from jumping on board. This is where Amazon Prime Photos come in. Yes, 
+Amazon Prime Photos just fancy version of CloudDrive but it is geared towards images and let's you add up to 5 people to the account. Sign me up!</p>
+
+<p>Now I that have 3 accounts I pay for, how do I actually make it cheaper?. Move everything into Amazon of course. Turns out it is easier said than done. Moving 250+Gb 
+of images and videos from multiple cloud accounts and physical machines proved to be rather tedious.</p>
+
+<p>as it turns out there is no direct connector yet, so you need to download images from all clouds and then upload them into Amazon cloud. 
+Some may think that with Google Takeout it would be just a matter of clicking few buttons and done. Well, yes, it is probably going to work if 
+you have a few gigs of data, but with 140+Gb in each account it did not work as advertised.</p>
+
+<p>Once you start the process, you will learn that not all backups result in full backup. Google will let you know that some files are missing. 
+On top of that it will split backup into 2Gb chunks and you can download each chunk only 5 times. Downloading 150+ individual files is not fun. 
+On top of that downloads will timeout, you will have to login every 10 or 15 files, and most importantly getting down data is painfully slow.</p>
+
+<p>Once get files down you will find another surprise. Once unpacked each chunk will create full tree of all albums and 
+spread images into random folders with ton of json files on top of that. Last part is really confusing. After 5 (yes FIVE) attempts at Takeout I was wondering if there is a better way.</p>
+
+<p>Turns out there is. In Google Drive you can create folder for Google Photos that will automatically put your Google Photos into a folder inside your Drive. 
+This process is much faster than getting archive from Takeout.</p>
+
+<p><img src="http://content.screencast.com/users/mkozlov/folders/Jing/media/0e0c1a0d-e7d6-4b9c-a441-c5e5b1c9ac8f/00000467.png" alt="image" /></p>
+
+<p>On top of that you can now get Google Drive App for your operating system and download entire folder onto your machine without every touching any files. No need to unzip or collect bits and pieces either. Very nice and fast-ish.</p>
+
+<p>Now that we have files on HDD, it is time to fire up your Amazon Drive App and watch files fly back into the cloud.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Running Node.js as a Service]]></title>
             <link href="/blog/2016/04/28/running-nodejs-as-a-service"/>
@@ -533,37 +569,6 @@ Both of them take two parameters $post and $options. $post is WordPress post obj
 <h2 id="testing">Testing</h2>
 
 <p>I need your help. Please get latest code from <a href="https://github.com/315design/Picasa-Albums-For-WordPress/tree/v1.0.6">github.com</a> and let me know what you think in <a href="https://github.com/315design/Picasa-Albums-For-WordPress/issues?sort=created&amp;direction=desc&amp;state=closed">Github's issue tracker</a>.</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[Where IN Query Using Codeigniter MongoDB Library]]></title>
-            <link href="/blog/2011/07/20/Where-IN-Query-Using-Codeigniter-MongoDB-Library"/>
-            <updated>2011-07-20T00:00:00-07:00</updated>
-            <id>/blog/2011/07/20/Where-IN-Query-Using-Codeigniter-MongoDB-Library</id>
-            <content type="html"><![CDATA[<p>Thanks to Alex Bilbie we all have simple way of integrating new MongoDB data store into Codeigniter applications. Thank you Alex and all others who contributed. Library lets you easily create complex where clause without touching MongoDB syntax. Unfortunately IN (and I imagine NIN and some other statements) are not translated correctly. Specificaly proble surfaces when you try to query documents by _id. It looks like there is an open issue on <a href="https://bitbucket.org/alexbilbie/codeigniter-mongo-library/issue/18/one-where-when-using-_id">bitbucket.org</a>, but page never loads for me. If it works for you and it has fix, you can stop reading.</p>
-
-<h3 id="july-24%2C-2011%3A-update">July 24, 2011: Update</h3>
-
-<p>My commit was pulled into main repo. Please be sure to <a href="https://github.com/alexbilbie/codeigniter-mongodb-library">check it out from Alex's repo</a>.</p>
-
-<h2 id="solution">Solution</h2>
-
-<p>I do not have bitbucket account, so I forked library on <a href="https://github.com/alexbilbie/codeigniter-mongodb-library">gitgub.com</a> and created a <a href="https://github.com/315design/codeigniter-mongodb-library/commit/053fe83fc870b287850f9ba49af89dc3cc595411">fix</a>:</p>
-
-<pre><code>if( is_array( $this-&gt;wheres['_id'][key($this-&gt;wheres['_id'])]) ){
-    foreach($this-&gt;wheres['_id'][key($this-&gt;wheres['_id'])] as $i=&gt;$id)
-    {
-        if( !($id instanceof MongoId) )
-        {
-            $this-&gt;wheres['_id'][key($this-&gt;wheres['_id'])][$i] = new MongoId($id);
-        }else{
-            $this-&gt;wheres['_id'] = new MongoId($this-&gt;wheres['_id']);
-        }
-    }
-}
-</code></pre>
-
-<p>Code may be not the most robust, but it does the job for me. You can simply replace line 601 <code>($this-&gt;wheres['_id'] = new MongoId($this-&gt;wheres['_id']);)</code> with the code above or clone my repo on <a href="https://github.com/">github.com</a>. Let me know what you think down bellow or open an <a href="https://github.com/315design/codeigniter-mongodb-library/issues">issue</a>.</p>
 ]]></content>
         </entry>
     </feed>
