@@ -6,6 +6,17 @@ A skeleton for a Sculpin based blog.
 Powered by [Sculpin](http://sculpin.io). =)
 
 
+Building Things
+--------
+* Pull both branches into separete folder
+* Run composer instal to bring Sculpin localy
+* Make changes in `code` branch
+* Run generate
+* `rsync -av mikhailkozlov.github.io/ mikhailkozlov/`
+* Commit changes and push up
+
+
+
 Features
 --------
 
