@@ -1,0 +1,80 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: content
+            field:
+              type: markdown
+              localizable: true
+              validate:
+                - required
+          -
+            handle: screenshot
+            field:
+              container: assets
+              type: assets
+              display: Screenshot
+              max_files: 1
+              min_files: 1
+              validate:
+                - required
+          -
+            handle: footer_content
+            field:
+              type: markdown
+              display: 'Footer Content'
+          -
+            handle: link_out
+            field:
+              type: text
+              display: 'Link Out'
+              instructions: 'Link to the item in portfolio'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: date
+            field:
+              type: date
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate:
+                - 'max:200'
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - portfolio
+              max_items: 1
+              listable: false
+              localizable: true
+          -
+            handle: type
+            field:
+              type: terms
+              taxonomies:
+                - type
+              display: 'Portfolio Type'
+              mode: select
+          -
+            handle: archived
+            field:
+              type: toggle
+              display: Archived
+title: Portfolio

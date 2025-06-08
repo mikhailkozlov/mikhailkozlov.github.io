@@ -1,0 +1,9 @@
+title: 'Portfolio Type'
+preview_targets:
+  -
+    label: Term
+    url: '{permalink}'
+    refresh: true
+template: portfolio/index
+term_template: portfolio/show
+layout: layout

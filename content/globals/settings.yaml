@@ -1,0 +1,19 @@
+title: Settings
+data:
+  site_name: 'MIKHAIL KOZLOV'
+  social:
+    -
+      id: bBH6xSSk
+      name: Github
+      url: 'https://github.com/mikhailkozlov'
+      icon: site/social-icons/github.svg
+    -
+      id: mbmjf29b
+      name: Threads
+      url: 'https://www.threads.net/@kozlovma'
+      icon: site/social-icons/threads.svg
+    -
+      id: mbmjflx9
+      name: Bluesky
+      url: 'https://bsky.app/profile/mikhailkozlov.com'
+      icon: site/social-icons/bluesky_logo.svg

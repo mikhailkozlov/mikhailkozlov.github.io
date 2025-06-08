@@ -1,0 +1,28 @@
+<div class="max-w-5xl mx-auto relative mt-16">
+    {{ svg src="/assets/site/scratches" class="absolute text-gray-800 mt-8 top-0 left-0 w-20 hidden md:block" }}
+    <article class="py-16 max-w-2xl mx-auto">
+        <header class="content mb-8">
+            <h1>{{ title }}</h1>
+            {{ content | widont }}
+        </header>
+
+        {{ collection:portfolio as="articles" sort="date:desc" }}
+        {{ if no_results }}
+        <h2 class="text-3xl italic tracking-tight">My meticulously crafted portfolio has vanished so completely that
+            even Sherlock Holmes just filed a missing JPEG report.</h2>
+        {{ /if }}
+
+        <div class="mb-8">
+            <div class="grid grid-cols-4 gap-4">
+                {{ articles }}
+                    <a href="{{ url }}" class="col-span-4 md:col-span-2 lg:col-span-1 m-1 p-1 border-2 border-gray-400 hover:border-orange">
+                        {{ screenshot }}
+                            <img src="{{ url }}" alt="{{ alt }}" />
+                        {{ /screenshot }}
+                    </a>
+                {{ /articles }}
+            </div>
+        </div>
+        {{ /collection:portfolio }}
+    </article>
+</div>

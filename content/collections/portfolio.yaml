@@ -1,0 +1,20 @@
+title: Portfolio
+template: portfolio/show
+layout: layout
+mount: c2c19f31-5898-484b-83fa-4e3549fd6987
+taxonomies:
+  - type
+revisions: false
+route: '/portfolio/{slug}'
+sort_by: date
+sort_dir: desc
+date_behavior:
+  past: public
+  future: private
+preview_targets:
+  -
+    label: Entry
+    url: '{permalink}'
+    refresh: true
+structure:
+  root: false
