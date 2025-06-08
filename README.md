@@ -1,3 +1,8 @@
+## The Magical World of Cool Writings
+
+`rsync -av --delete --exclude='.git' --exclude='.gitignore' --exclude='CNAME' /Users/mkozlov/Sites/cyberspace-place/storage/app/static/ /Users/mkozlov/Sites/mikhailkozlov/`
+
+
 <!-- statamic:hide --><p align="center"><img src="https://statamic.com/assets/branding/Statamic-Logo-Rad.png" width="100" alt="Statamic Logo" /></p>
 <h1 align="center">
   Statamic Starter Kit: Cool Writings
