@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Articles — MIKHAIL KOZLOV</title>
-    <meta name="description" content="Articles">
+    <title>Deploy Statamic Static Site Using GitHub Actions — MIKHAIL KOZLOV</title>
+    <meta name="description" content="I recently set up a new Statamic site using the Cool Writings starter kit (statamic/starter-kit-cool-writings). The official documentation walks you through local development and static site generation (SSG), but it doesn’t cover how to deploy to GitHub Pages. Here’s how to do that using GitHub Actions.">
     <meta name="theme-color" content="00908F">
     <link rel="preload" as="style" href="https://mikhailkozlov.com/build/assets/site-1Gl_nBc9.css" /><link rel="modulepreload" href="https://mikhailkozlov.com/build/assets/site-ERCyDI-0.js" /><link rel="stylesheet" href="https://mikhailkozlov.com/build/assets/site-1Gl_nBc9.css" /><script type="module" src="https://mikhailkozlov.com/build/assets/site-ERCyDI-0.js"></script>
 </head>
@@ -32,7 +32,7 @@
     </div>
     <div class="w-full lg:w-auto lg:flex items-center" @click.outside="showMobileNav = false" x-show="showMobileNav">
         
-            <a href="/articles" class="block font-medium text-white mt-4 lg:inline-block text-white hover:text-gray-400 lg:mt-0 mr-12">
+            <a href="/articles" class="block  mt-4 lg:inline-block text-white hover:text-gray-400 lg:mt-0 mr-12">
                 Articles
             </a>
         
@@ -49,153 +49,90 @@
 
     </div>
     <div class="px-4 sm:px-10">
-        <div class="max-w-5xl mx-auto relative mt-16">
+        <div class="max-w-5xl mx-auto relative mt-16 content">
     <svg class="absolute text-gray-800 mt-8 top-0 left-0 w-20 hidden md:block" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="164.6px" height="148.6px" viewBox="0 0 164.6 148.6" style="enable-background:new 0 0 164.6 148.6;" xml:space="preserve"><g fill="currentColor"><path d="M0,85.4c7.4-18,34.4-62.5,56.7-74.1c14,3.9-13.5,18.8-27.5,41.1c-6,8.4-10.9,16.3-16.1,26.1C10.9,82.9,6,96,0,85.9 C0,85.8,0,85.6,0,85.4z"/><path d="M98.3,87.2c-4.5,9.7-14.5,17.1-20.9,27.5c-8.6,10-14,23.5-23.2,33.9c-17.4,1.4,12.2-32.2,15.7-39 C72.6,108.2,94.6,70.3,98.3,87.2z"/><path d="M108.8,31.1C101.3,42.3,88,51,79,63.4c-4.7,3.7-10.6,17.5-16.7,17c-12.9-2.1,13-25,18.1-32.3 C84.9,44.9,105.7,15.7,108.8,31.1z"/><path d="M125.9,88.2c-13.5-4.1,7.5-16.4,14.2-23.5c5.8-3.4,17.6-20.1,23.4-13.9c5.2,5.8-10,12.7-15.3,18.8 C140.9,74.9,134.8,83.9,125.9,88.2z"/><path d="M37.3,74.1c-11.9-2.7,2.5-17.1,7-24.1c3.2-2.7,13.2-19.2,18.6-11.1c3.4,4.9-8.7,11.6-12.2,17.7 C45.8,61,44,70.8,37.3,74.1z"/><path d="M102.2,110.4c-1.6,5.8-7.8,10-11.4,16.2c-2.7,3.5-5.4,11.3-11.2,6.2c-4-5.8,5.1-11.4,9.2-18.5 C91.8,110.4,99.6,99.2,102.2,110.4z"/><path d="M112.7,62.5c-14.9-4,11.4-19.9,17.7-24.3c4.7-1.6,7.9,6.3,2.6,8.9C125.7,51,120.5,58.7,112.7,62.5z"/><path d="M86.3,20.9C73.3,17,93.8,5,99.2,0c8.5,0.5,5.4,8.3-1,12.6C94.7,15.4,91.6,19.3,86.3,20.9z"/><path d="M36.9,115.9c-11-1,0.8-16.7,5.4-21.3c10-2.2,6.4,7.4,1.8,12.3C41.8,109.7,41.5,114.9,36.9,115.9z"/></g></svg>
-    <article class="py-16 max-w-2xl mx-auto">
-        <header class="content mb-8">
-            <h1>Articles</h1>
-            <p>These are my various writings. Some might say they are&nbsp;cool.</p>
+    <article class="lg:py-16 max-w-2xl mx-auto">
+        <h1>Deploy Statamic Static Site Using GitHub Actions</h1>
+        <div class="bg-gray-800 inline-block text-sm mb-16 pr-4 pl-16 -ml-16 uppercase tracking-widest text-white py-1 rounded-r-full">
+            Published
+            
+                in <a href="/articles/topics/side-note" class="text-teal-light no-underline hover:text-white">side note</a>, <a href="/articles/topics/tips" class="text-teal-light no-underline hover:text-white">tips</a>
+            
+            on Jun 8, 2025
+        </div>
+        <div class="content">
+            <p>I recently set up a new Statamic site using the Cool Writings starter kit (statamic/starter-kit-cool-writings). The official documentation walks you through local development and static site generation (SSG), but it doesn’t cover how to deploy to GitHub Pages. Here’s how to do that using GitHub&nbsp;Actions.</p>
+<h2>Update ssg.php to Customize Output&nbsp;Path</h2>
+<p>By default, Statamic SSG outputs to build, but we want to generate files in storage/static instead. Update your&nbsp;config/statamic/ssg.php:</p>
+<pre><code>'output_path' =&gt; base_path('storage/static'),
+</code></pre>
+<p>You want build files to be included too, so update config to do&nbsp;that:</p>
+<pre><code>    'copy' =&gt; [
+       public_path('assets') =&gt; 'assets',
+       public_path('build') =&gt; 'build',
+       public_path('css') =&gt; 'css',
+       public_path('js') =&gt; 'js',
+   ],
+</code></pre>
+<h2>Generate Static&nbsp;Files</h2>
+<p>To build the static site,&nbsp;run:</p>
+<pre><code>php please ssg:generate
+</code></pre>
+<p>This will output all static content to storage/static. Make sure the folder is committed to version control (<code>git add&nbsp;storage/static</code>).</p>
+<h2>Enable GitHub Pages &amp;&nbsp;Generate&nbsp;Workflow</h2>
+<ol>
+<li>Go to your GitHub repo settings →&nbsp;Pages.</li>
+<li>Choose GitHub Actions as your deployment&nbsp;source.</li>
+<li>GitHub will generate a starter&nbsp;workflow.</li>
+</ol>
+<p>Update the generated workflow file to deploy files from the storage/static folder. Here’s a minimal&nbsp;example:</p>
+<pre><code># Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
 
-        </header>
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: [&quot;main&quot;]
 
-        
-        
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/deploy-statamic-static-site-using-github-actions" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    Deploy Statamic Static Site Using GitHub&nbsp;Actions
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">June 8th, 2025</span> &mdash;
-                I recently set up a new Statamic site using the Cool Writings starter kit (statamic/starter-kit-cool-writings). The official documentation walks you through local development and static site generation (SSG), but it doesn’t cover how to deploy to GitHub Pages. Here’s how to do that using GitHub&nbsp;Actions.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/from-sculpin-to-statamic-breathing-new-life-into-my-blog" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    From Sculpin to Statamic: Breathing New Life into My&nbsp;Blog
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">June 7th, 2025</span> &mdash;
-                Sculpin’s ecosystem has slowed to a crawl, and I still want an easy way to publish the occasional post. Statamic gives me an actively maintained, Laravel-powered toolkit that still feels like a static site generator when I need it&nbsp;to.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/running-nodejs-as-a-service" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    Running Node.js as a&nbsp;Service
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">April 28th, 2016</span> &mdash;
-                It is no secret that making sure that you data is flowing is biggest concern for reliable statistics (and pretty pictures). Fortunately systemd now available on all popular Linux distributions so we do not have to write&nbsp;much.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/raspberrypi-with-aeotec-z-stick" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    Setup RaspberryPi with Aeotec&nbsp;Z-Stick
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">March 3rd, 2016</span> &mdash;
-                Now that we have Raspberry Pi 2 Model B, Aeotec Z-Stick and Aeotec Z-Wave Home Energy Meters it is time to get the talking to each other. Pairing Aeotec Z-Stick and Aeotec Z-Wave Home Energy Meters is a no-brainer, just follow instructions in the box. Getting RaspberryPi effectively communicating to Aeotec Z-Stick is a bit less&nbsp;trivial.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/request_rate_limiting_in_lumen_5_2" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    Request Rate Limiting in Lumen&nbsp;5.2
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">February 29th, 2016</span> &mdash;
-                If you look at Laravel 5.2, you'll find that it has Middleware called "throttle". This particular middleware is capable of limiting requests and works using internal cache&nbsp;system.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/raspberrypi-energy-meter" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    RaspberryPi Energy&nbsp;Meter
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">February 20th, 2016</span> &mdash;
-                Have you ever wonder how much electricity is consumed by devices in your house and what are the patters of use? Or pehaps you have and EV car in garage that does not really tell you how much charge it takes? If you said yes to either one follow&nbsp;along.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/angularjs-experiment" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    AngularJS&nbsp;Experiment
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">July 11th, 2014</span> &mdash;
-                Running static website means you have find different ways to make it faster. Fortunately there are ton of JS libraries that can&nbsp;help.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/moving-to-github" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    Moving to Github&nbsp;Pages
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">July 7th, 2014</span> &mdash;
-                Hosting, managing, updaing... Who has time for this? Good thing great folks from github made sites avaialbele to&nbsp;everyone.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/certified-certified-scrum-master" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    I’m Certified Certified Scrum&nbsp;Master!
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">December 9th, 2011</span> &mdash;
-                Took a short course back in September and now I'm Certified Certified Scrum&nbsp;Master.
-            </p>
-        </div>
-        
-        <div class="mb-8">
-            <h2 class="mb-2">
-                <a href="/picasa-albums-v1-0-6" class="text-2xl hover:text-orange tracking-tight leading-tight font-bold">
-                    Picasa Albums v1.0.6 is&nbsp;live
-                </a>
-            </h2>
-            <p class="text-gray-600">
-                <span class="text-gray-800 text-sm uppercase tracking-widest font-medium">August 31st, 2011</span> &mdash;
-                Thanks you all for feedback. I've implemented most of it and bumped version to&nbsp;1.0.6
-            </p>
-        </div>
-        
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-        
-        
-        <div class="flex justify-between text-xl -mx-16 pt-16 font-bold">
-            <a href="" class="opacity-25">
-                &larr; Back to the future
-            </a>
-            <a href="/articles/page/2">
-                Forward to the past &rarr;
-            </a>
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: &quot;pages&quot;
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload storage/static
+          path: 'storage/static'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+</code></pre>
+<p>And that’s it! You’ll now have your Statamic static site automatically deployed to GitHub Pages every time you push to main. Just make sure to build files locally and commit generated&nbsp;content.</p>
+
         </div>
-        
-        
-        
     </article>
 </div>
 
