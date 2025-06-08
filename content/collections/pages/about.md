@@ -3,10 +3,10 @@ id: 62136fa2-9e5c-4c38-a894-a2753f02f5ff
 blueprint: home
 title: About
 updated_by: 5a0bbf89-fd55-440f-ae32-47c9d13fd12e
-updated_at: 1749356879
+updated_at: 1749357255
 template: page
 ---
-Ever since school, I’ve been designing, building, and implementing a wide range of automation tools and systems for small and medium-sized businesses.
+Ever since school, I’ve been designing, building, and implementing a all sorts of automation tools and systems for small and medium-sized businesses.
 
 ![Mikhail Kozlov](/assets/content/mikhailkozlov.jpeg)
 
