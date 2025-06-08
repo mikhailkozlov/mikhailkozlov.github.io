@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'base_url' => config('app.url'),
+    'base_url' => 'https://mikhailkozlov.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +40,7 @@ return [
 
     'copy' => [
         public_path('assets') => 'assets',
+        public_path('build') => 'build',
         public_path('css') => 'css',
         public_path('js') => 'js',
     ],
