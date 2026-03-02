@@ -8,9 +8,9 @@ type:
   - website
 clients_id: '14'
 updated_by: 5a0bbf89-fd55-440f-ae32-47c9d13fd12e
-updated_at: 1749344529
+updated_at: 1772464689
 link_out: www.promservice.ru
-date: 2013-07-01
+date: '2013-07-01 00:00'
 archived: true
 ---
 After some experiments with Joomla and other CMSs company went back to basics with simple and clean design. New site is based on <a href='http://getbootstrap.com/'>Bootstrap</a> with custom theme and color pallet to make it look personal.

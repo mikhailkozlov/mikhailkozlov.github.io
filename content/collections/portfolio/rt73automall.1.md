@@ -9,9 +9,9 @@ type:
   - website
 clients_id: '11'
 updated_by: 5a0bbf89-fd55-440f-ae32-47c9d13fd12e
-updated_at: 1749345192
+updated_at: 1772464721
 link_out: www.rt73automall.com
-date: 2009-02-16
+date: '2009-02-16 00:00'
 archived: true
 ---
 [Rt 73 Auto Mall](https://www.rt73automall.com/) located in Palmyra, NJ and offers only top quality vehicles from top manufacturers in the World such as Acura, Lexus, BMW, Mercedes Benz, Audi, Infiniti, Jaguar, Land Rover, and others.

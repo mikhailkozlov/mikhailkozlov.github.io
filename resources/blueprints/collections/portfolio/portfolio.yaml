@@ -56,15 +56,6 @@ tabs:
               validate:
                 - 'max:200'
           -
-            handle: parent
-            field:
-              type: entries
-              collections:
-                - portfolio
-              max_items: 1
-              listable: false
-              localizable: true
-          -
             handle: type
             field:
               type: terms
